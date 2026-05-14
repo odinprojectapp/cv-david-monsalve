@@ -3,321 +3,483 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>David José Monsalve Guzmán — Portfolio & CV</title>
+<title>David José Monsalve Guzmán — Especialista Logístico & Analista de Datos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
+/* ─── RESET & BASE ─────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#050A14;--bg2:#080F1C;
-  --teal:#00B4D8;--emerald:#06D6A0;--purple:#A78BFA;
-  --text:#E8EFF8;--muted:#7A8BA8;
-  --card:rgba(255,255,255,0.04);--cb:rgba(255,255,255,0.08);
-  --font:'Plus Jakarta Sans',sans-serif;
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:#020817;
+  color:#f1f5f9;
+  font-family:'Outfit',sans-serif;
+  overflow-x:hidden;
+  line-height:1.6;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#020817}
+::-webkit-scrollbar-thumb{background:#38bdf8;border-radius:9999px}
+a{text-decoration:none;color:inherit}
 
-/* NOISE */
-body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.025;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:128px 128px}
+/* ─── CSS VARIABLES ────────────────────────────────────── */
+:root{
+  --bg:#020817;
+  --bg2:#0f172a;
+  --bg3:#1e293b;
+  --border:rgba(51,65,85,.55);
+  --border-glow:rgba(56,189,248,.4);
+  --sky:#38bdf8;
+  --sky-d:#0ea5e9;
+  --em:#34d399;
+  --pur:#a78bfa;
+  --amb:#fbbf24;
+  --text:#f1f5f9;
+  --text2:#cbd5e1;
+  --text3:#94a3b8;
+  --muted:#64748b;
+  --head:'Space Grotesk',sans-serif;
+  --body:'Outfit',sans-serif;
+}
 
-/* SCROLLBAR */
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:rgba(0,180,216,.35);border-radius:9999px}
+/* ─── BACKGROUND ───────────────────────────────────────── */
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:#020817;
+}
+.bg-grid::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(56,189,248,.065) 1px,transparent 0);
+  background-size:40px 40px;
+}
+.bg-grid::after{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 10% 10%,rgba(56,189,248,.07) 0%,transparent 55%),
+    radial-gradient(ellipse 55% 45% at 90% 90%,rgba(52,211,153,.055) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 40% at 55% 50%,rgba(167,139,250,.04) 0%,transparent 55%);
+}
+.noise{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+}
+section,nav,header,footer{position:relative;z-index:2}
 
-/* NAV */
-nav{position:fixed;top:1.25rem;left:50%;transform:translateX(-50%);z-index:200;
-  display:flex;align-items:center;gap:.4rem;
-  padding:.45rem .45rem .45rem 1.4rem;
-  background:rgba(5,10,20,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,.1);border-radius:9999px;
-  transition:all .5s cubic-bezier(.32,.72,0,1);white-space:nowrap}
-.nav-links{display:flex;align-items:center;gap:.15rem;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:500;
-  padding:.38rem .75rem;border-radius:9999px;letter-spacing:.01em;
-  transition:all .4s cubic-bezier(.32,.72,0,1)}
+/* ─── NAVIGATION ───────────────────────────────────────── */
+nav{
+  position:fixed;top:1.25rem;left:50%;transform:translateX(-50%);z-index:100;
+  display:flex;align-items:center;gap:.3rem;
+  padding:.42rem .42rem .42rem 1.5rem;
+  background:rgba(2,8,23,.82);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.09);border-radius:9999px;
+  white-space:nowrap;
+  transition:all .5s cubic-bezier(.32,.72,0,1);
+}
+.nav-logo{font-family:var(--head);font-weight:700;font-size:.9rem;color:var(--sky);margin-right:.4rem;letter-spacing:-.02em}
+.nav-links{display:flex;list-style:none;gap:.1rem}
+.nav-links a{
+  font-family:var(--body);font-size:.78rem;font-weight:500;color:var(--muted);
+  padding:.38rem .78rem;border-radius:9999px;letter-spacing:.01em;
+  transition:all .35s cubic-bezier(.32,.72,0,1);
+}
 .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.07)}
-.nav-cta{display:inline-flex;align-items:center;gap:.4rem;
-  background:var(--teal);color:#050A14 !important;font-weight:700 !important;font-size:.78rem !important;
-  padding:.5rem 1.1rem !important;border-radius:9999px !important;
-  transition:all .4s cubic-bezier(.32,.72,0,1) !important}
-.nav-cta:hover{background:var(--emerald) !important;transform:scale(1.04)}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.5rem}
-.hamburger span{display:block;width:20px;height:1.5px;background:var(--text);border-radius:2px;
-  transition:all .4s cubic-bezier(.32,.72,0,1);transform-origin:center}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--sky);color:#020817;font-family:var(--body);
+  font-weight:700;font-size:.78rem;padding:.52rem 1.1rem;border-radius:9999px;
+  transition:all .4s cubic-bezier(.32,.72,0,1);
+}
+.nav-cta:hover{background:var(--em);transform:scale(1.04)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.45rem;margin-left:.2rem}
+.hamburger span{display:block;width:19px;height:1.5px;background:var(--text);border-radius:2px;transition:all .4s cubic-bezier(.32,.72,0,1);transform-origin:center}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
-/* MOBILE OVERLAY */
-.mob-menu{display:none;position:fixed;inset:0;z-index:190;
-  background:rgba(5,10,20,.96);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-  flex-direction:column;align-items:center;justify-content:center;gap:2rem}
-.mob-menu.open{display:flex}
-.mob-menu a{color:var(--text);text-decoration:none;font-size:1.9rem;font-weight:700;
-  opacity:0;transform:translateY(28px);transition:all .5s cubic-bezier(.32,.72,0,1)}
-.mob-menu.open a{opacity:1;transform:translateY(0)}
-.mob-menu.open a:nth-child(1){transition-delay:.05s}
-.mob-menu.open a:nth-child(2){transition-delay:.1s}
-.mob-menu.open a:nth-child(3){transition-delay:.15s}
-.mob-menu.open a:nth-child(4){transition-delay:.2s}
-.mob-menu.open a:nth-child(5){transition-delay:.25s}
-.mob-menu.open a:nth-child(6){transition-delay:.3s}
+/* ─── MOBILE MENU ──────────────────────────────────────── */
+.mob-overlay{
+  display:none;position:fixed;inset:0;z-index:90;
+  background:rgba(2,8,23,.97);
+  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  flex-direction:column;align-items:center;justify-content:center;gap:1.75rem;
+}
+.mob-overlay.open{display:flex}
+.mob-overlay a{
+  font-family:var(--head);font-size:2rem;font-weight:700;color:var(--text);
+  opacity:0;transform:translateY(30px);transition:all .5s cubic-bezier(.32,.72,0,1);
+}
+.mob-overlay.open a{opacity:1;transform:none}
+.mob-overlay.open a:nth-child(1){transition-delay:.06s}
+.mob-overlay.open a:nth-child(2){transition-delay:.11s}
+.mob-overlay.open a:nth-child(3){transition-delay:.16s}
+.mob-overlay.open a:nth-child(4){transition-delay:.21s}
+.mob-overlay.open a:nth-child(5){transition-delay:.26s}
+.mob-overlay.open a:nth-child(6){transition-delay:.31s}
+.mob-overlay a:hover{color:var(--sky)}
 
-/* ORBS */
-.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;animation:orbFloat 9s ease-in-out infinite}
-.orb-1{width:520px;height:520px;background:radial-gradient(circle,rgba(0,180,216,.18) 0%,transparent 70%);top:-120px;left:-120px;animation-delay:0s}
-.orb-2{width:420px;height:420px;background:radial-gradient(circle,rgba(6,214,160,.13) 0%,transparent 70%);bottom:-100px;right:-80px;animation-delay:-3.5s}
-.orb-3{width:320px;height:320px;background:radial-gradient(circle,rgba(100,60,220,.1) 0%,transparent 70%);top:45%;left:58%;animation-delay:-6s}
-@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(28px,-18px) scale(1.05)}66%{transform:translate(-18px,14px) scale(.97)}}
+/* ─── SHARED LAYOUT ────────────────────────────────────── */
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.sec{padding:7rem 1.5rem}
+.sec-head{margin-bottom:4.5rem}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);border-radius:9999px;
+  padding:.26rem .85rem;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sky);margin-bottom:1rem;
+}
+.dot-pulse{width:6px;height:6px;border-radius:50%;background:var(--sky);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.sec-title{font-family:var(--head);font-size:clamp(2.3rem,4.5vw,3.3rem);font-weight:700;letter-spacing:-.038em;line-height:1.06;margin-bottom:.8rem;color:var(--text)}
+.sec-sub{font-size:.95rem;color:var(--text3);max-width:540px;line-height:1.82}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.22),transparent);margin:0 1.5rem}
 
-/* HERO */
-.hero{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:8rem 1.5rem 5rem;position:relative;overflow:hidden}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(0,180,216,.09);border:1px solid rgba(0,180,216,.22);border-radius:9999px;
-  padding:.32rem .95rem;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);
-  margin-bottom:1.75rem;opacity:0;transform:translateY(20px);
-  animation:fadeUp .8s cubic-bezier(.32,.72,0,1) .2s forwards}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-.hero-name{font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:1.04;letter-spacing:-.035em;
-  margin-bottom:.9rem;
-  background:linear-gradient(135deg,#E8EFF8 0%,#A0B8D0 50%,#00B4D8 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  opacity:0;transform:translateY(25px);animation:fadeUp .9s cubic-bezier(.32,.72,0,1) .35s forwards}
-.hero-sub{font-size:clamp(1rem,2.5vw,1.3rem);font-weight:400;color:var(--muted);
-  margin-bottom:2.5rem;max-width:580px;
-  opacity:0;transform:translateY(20px);animation:fadeUp .9s cubic-bezier(.32,.72,0,1) .5s forwards}
-.hero-sub strong{color:var(--teal);font-weight:600}
-.hero-actions{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;justify-content:center;
-  opacity:0;transform:translateY(20px);animation:fadeUp .9s cubic-bezier(.32,.72,0,1) .65s forwards}
+/* ─── PROFILE TEXT ──────────────────────────────────────── */
+.profile-p{font-size:.97rem;color:var(--text3);line-height:1.85;margin-bottom:1rem}
 
-/* BUTTONS */
-.btn-p{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal);color:#050A14;
-  text-decoration:none;font-weight:700;font-size:.88rem;padding:.8rem 1.4rem;border-radius:9999px;
-  transition:all .5s cubic-bezier(.32,.72,0,1)}
-.btn-p:hover{background:var(--emerald);transform:scale(1.03) translateY(-2px)}
-.btn-icon{width:26px;height:26px;border-radius:50%;background:rgba(5,10,20,.2);
+/* ─── REVEAL ANIMATIONS ────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(32px)}
+
+/* ─── HERO ──────────────────────────────────────────────── */
+.hero{
+  min-height:100dvh;display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;gap:3rem;
+  padding:7rem 1.5rem 4rem;
+  max-width:1200px;margin:0 auto;
+}
+.hero-left{display:flex;flex-direction:column;gap:1.4rem}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:9999px;
+  padding:.32rem 1rem;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sky);width:fit-content;
+}
+.hero-name{
+  font-family:var(--head);font-size:clamp(2.8rem,5.5vw,4.8rem);font-weight:700;
+  line-height:1.03;letter-spacing:-.04em;color:var(--text);
+}
+.hero-name span{color:var(--sky)}
+.hero-role{font-size:1.05rem;color:var(--text2);font-weight:400;line-height:1.6;max-width:440px}
+.role-cycling{color:var(--sky);font-weight:600;display:inline-block;min-width:200px}
+.cursor-blink{display:inline-block;width:2px;height:1em;background:var(--sky);margin-left:2px;vertical-align:middle;animation:blink .7s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-desc{font-size:.9rem;color:var(--muted);line-height:1.8;max-width:430px}
+.hero-actions{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:.3rem}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--sky);color:#020817;font-family:var(--body);font-weight:700;font-size:.88rem;
+  padding:.78rem 1.5rem;border-radius:9999px;
+  transition:all .4s cubic-bezier(.32,.72,0,1);
+}
+.btn-primary:hover{background:var(--em);transform:translateY(-2px) scale(1.03)}
+.btn-primary .bi{
+  width:24px;height:24px;border-radius:50%;background:rgba(2,8,23,.2);
   display:flex;align-items:center;justify-content:center;
-  transition:transform .4s cubic-bezier(.32,.72,0,1)}
-.btn-p:hover .btn-icon{transform:translate(2px,-2px) scale(1.12)}
-.btn-s{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--text);
-  text-decoration:none;font-weight:600;font-size:.88rem;padding:.8rem 1.4rem;border-radius:9999px;
-  border:1px solid rgba(255,255,255,.12);transition:all .5s cubic-bezier(.32,.72,0,1)}
-.btn-s:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22)}
+  transition:transform .35s cubic-bezier(.32,.72,0,1);
+}
+.btn-primary:hover .bi{transform:translate(2px,-2px) scale(1.1)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid var(--border);color:var(--text2);font-family:var(--body);
+  font-weight:600;font-size:.88rem;padding:.78rem 1.5rem;border-radius:9999px;
+  transition:all .4s cubic-bezier(.32,.72,0,1);
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25);color:var(--text);background:rgba(255,255,255,.05)}
 
-/* PHOTO */
-.hero-photo{margin-top:3.5rem;opacity:0;transform:translateY(28px) scale(.96);
-  animation:fadeUp 1s cubic-bezier(.32,.72,0,1) .8s forwards}
-.photo-outer{width:155px;height:155px;border-radius:50%;
-  background:rgba(0,180,216,.07);border:1px solid rgba(0,180,216,.2);padding:4px;margin:0 auto}
-.photo-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;
-  background:rgba(255,255,255,.04);box-shadow:inset 0 1px 1px rgba(255,255,255,.12)}
+/* ─── HERO RIGHT ───────────────────────────────────────── */
+.hero-right{display:flex;flex-direction:column;align-items:center;gap:1.5rem;position:relative}
+.photo-wrap{
+  width:280px;height:280px;border-radius:50%;
+  border:1px solid rgba(56,189,248,.28);padding:5px;
+  background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(52,211,153,.04));
+  box-shadow:0 0 70px rgba(56,189,248,.15),0 0 140px rgba(56,189,248,.06),inset 0 1px 0 rgba(255,255,255,.06);
+  flex-shrink:0;
+}
+.photo-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--bg2)}
 .photo-inner img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.photo-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-  font-size:2.5rem;font-weight:800;color:var(--teal);background:rgba(0,180,216,.07)}
+.photo-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:3rem;font-weight:800;color:var(--sky)}
+.hero-chips{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;max-width:360px}
+.hchip{
+  display:flex;align-items:center;gap:.4rem;
+  background:rgba(15,23,42,.9);border:1px solid var(--border);border-radius:9999px;
+  padding:.38rem .85rem;font-size:.75rem;font-weight:500;color:var(--text2);
+}
+.hchip svg{flex-shrink:0;color:var(--sky)}
+.hchip.g svg{color:var(--em)}
+.hchip.p svg{color:var(--pur)}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+/* ─── MARQUEE ───────────────────────────────────────────── */
+.marquee-wrap{overflow:hidden;padding:1.2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(15,23,42,.5)}
+.marquee-track{display:flex;gap:2.5rem;width:max-content;animation:marquee 28s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mtag{
+  display:flex;align-items:center;gap:.55rem;
+  font-family:var(--head);font-size:.78rem;font-weight:600;letter-spacing:.06em;
+  color:var(--muted);text-transform:uppercase;white-space:nowrap;
+  transition:color .3s;
+}
+.mtag:hover{color:var(--sky)}
+.mtag svg{color:var(--sky);flex-shrink:0}
+.msep{color:rgba(51,65,85,.8);font-size:1rem;flex-shrink:0}
 
-/* SECTION */
-section{padding:6.5rem 1.5rem}
-.container{max-width:1080px;margin:0 auto}
-.eyebrow{display:inline-flex;align-items:center;gap:.45rem;
-  background:rgba(0,180,216,.08);border:1px solid rgba(0,180,216,.15);border-radius:9999px;
-  padding:.28rem .85rem;font-size:.63rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);
-  margin-bottom:1.1rem}
-.sec-title{font-size:clamp(1.9rem,4vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:.9rem}
-.sec-sub{color:var(--muted);font-size:.95rem;max-width:500px;line-height:1.75}
-.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,180,216,.28),transparent)}
+/* ─── CARDS ─────────────────────────────────────────────── */
+.card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:1.25rem;
+  padding:1.75rem;position:relative;overflow:hidden;
+  transition:border-color .45s cubic-bezier(.32,.72,0,1),transform .45s cubic-bezier(.32,.72,0,1),box-shadow .45s cubic-bezier(.32,.72,0,1);
+}
+.card::before{
+  content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.022) 0%,transparent 55%),
+    linear-gradient(180deg,rgba(255,255,255,.055) 0%,rgba(255,255,255,0) 2px);
+}
+.card:hover{border-color:var(--border-glow);transform:translateY(-5px);box-shadow:0 8px 40px rgba(56,189,248,.1),0 0 0 1px rgba(56,189,248,.12)}
+.card.em:hover{border-color:rgba(52,211,153,.4);box-shadow:0 8px 40px rgba(52,211,153,.1),0 0 0 1px rgba(52,211,153,.12)}
+.card.pur:hover{border-color:rgba(167,139,250,.4);box-shadow:0 8px 40px rgba(167,139,250,.1),0 0 0 1px rgba(167,139,250,.12)}
 
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.32,.72,0,1),transform .8s cubic-bezier(.32,.72,0,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+/* ─── BENTO GRID ────────────────────────────────────────── */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:.85rem;margin-top:2.5rem}
+.c12{grid-column:span 12}.c8{grid-column:span 8}.c7{grid-column:span 7}
+.c6{grid-column:span 6}.c5{grid-column:span 5}.c4{grid-column:span 4}
 
-/* BENTO */
-.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:.9rem;margin-top:2.75rem}
-.s8{grid-column:span 8}.s4{grid-column:span 4}
-.s6{grid-column:span 6}.s5{grid-column:span 5}.s7{grid-column:span 7}
-.card{background:var(--card);border:1px solid var(--cb);border-radius:1.5rem;padding:1.85rem;position:relative;overflow:hidden;
-  transition:border-color .5s cubic-bezier(.32,.72,0,1),transform .5s cubic-bezier(.32,.72,0,1)}
-.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.025) 0%,transparent 60%);pointer-events:none}
-.card:hover{border-color:rgba(0,180,216,.28);transform:translateY(-3px)}
-
-/* DOUBLE BEZEL */
-.d-outer{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055);border-radius:2rem;padding:5px}
-.d-inner{background:rgba(8,15,28,.92);border-radius:calc(2rem - 5px);padding:1.85rem;
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.055);height:100%}
-
-/* STATS */
-.stat-n{font-size:2.9rem;font-weight:800;letter-spacing:-.04em;
-  background:linear-gradient(135deg,var(--teal),var(--emerald));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.stat-l{font-size:.75rem;color:var(--muted);font-weight:500;margin-top:.45rem;letter-spacing:.05em}
-.divline{height:1px;background:rgba(255,255,255,.05);margin:.2rem 0}
-
-/* INFO */
-.info-row{display:flex;align-items:flex-start;gap:.7rem;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.83rem}
+/* ─── PROFILE SECTION ───────────────────────────────────── */
+.stat-val{font-family:var(--head);font-size:2.6rem;font-weight:700;letter-spacing:-.04em;color:var(--sky);line-height:1}
+.stat-lbl{font-size:.76rem;color:var(--muted);font-weight:500;margin-top:.4rem;letter-spacing:.04em}
+.sdivider{height:1px;background:rgba(255,255,255,.05);margin:.25rem 0}
+.pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
+.pill{
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.14);
+  border-radius:9999px;padding:.24rem .7rem;font-size:.73rem;color:var(--sky);font-weight:500;
+  transition:all .35s;
+}
+.pill:hover{background:rgba(56,189,248,.14);border-color:rgba(56,189,248,.28)}
+.pill.em{background:rgba(52,211,153,.07);border-color:rgba(52,211,153,.14);color:var(--em)}
+.pill.pur{background:rgba(167,139,250,.07);border-color:rgba(167,139,250,.14);color:var(--pur)}
+.info-row{display:flex;align-items:flex-start;gap:.65rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.83rem}
 .info-row:last-child{border-bottom:none}
-.info-ic{width:30px;height:30px;border-radius:8px;background:rgba(0,180,216,.09);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}
-.info-lb{color:var(--muted);font-size:.72rem;margin-bottom:.15rem}
-.info-vl{color:var(--text);font-weight:500;line-height:1.4}
+.iico{width:28px;height:28px;border-radius:8px;background:rgba(56,189,248,.09);border:1px solid rgba(56,189,248,.13);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--sky)}
+.ilb{font-size:.68rem;color:var(--muted);margin-bottom:.12rem;font-weight:500}
+.ivl{color:var(--text);font-weight:500;line-height:1.35}
 
-/* PILLS */
-.pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.5rem}
-.pill{background:rgba(0,180,216,.08);border:1px solid rgba(0,180,216,.15);border-radius:9999px;
-  padding:.28rem .75rem;font-size:.73rem;color:var(--teal);font-weight:500;
-  transition:all .4s cubic-bezier(.32,.72,0,1)}
-.pill:hover{background:rgba(0,180,216,.15);border-color:rgba(0,180,216,.32)}
-.pill.g{background:rgba(6,214,160,.08);border-color:rgba(6,214,160,.15);color:var(--emerald)}
-.pill.p{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.15);color:var(--purple)}
+/* ─── SKILLS ────────────────────────────────────────────── */
+.sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.85rem;margin-top:2.5rem}
+.sk-title{font-size:.63rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);margin-bottom:1.25rem;display:flex;align-items:center;gap:.45rem}
+.sk-title.em{color:var(--em)}.sk-title.pur{color:var(--pur)}.sk-title.amb{color:var(--amb)}
+.sk-ico{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;background:rgba(56,189,248,.09)}
+.sk-ico.em{background:rgba(52,211,153,.09)}.sk-ico.pur{background:rgba(167,139,250,.09)}.sk-ico.amb{background:rgba(251,191,36,.09)}
+.sk-item{margin-bottom:.85rem}
+.sk-item:last-child{margin-bottom:0}
+.sk-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.sk-name{font-size:.83rem;font-weight:500;color:var(--text2)}
+.sk-pct{font-size:.7rem;color:var(--muted);font-weight:600}
+.sk-bar{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:9999px;overflow:hidden}
+.sk-fill{height:100%;width:0;border-radius:9999px;background:linear-gradient(90deg,var(--sky),var(--em));transition:width 1.2s cubic-bezier(.32,.72,0,1)}
+.sk-fill.em{background:linear-gradient(90deg,var(--em),#0ea5e9)}
+.sk-fill.pur{background:linear-gradient(90deg,var(--pur),#ec4899)}
+.sk-fill.amb{background:linear-gradient(90deg,var(--amb),#f97316)}
 
-/* SKILLS */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.9rem;margin-top:2.75rem}
-.sk-cat{background:var(--card);border:1px solid var(--cb);border-radius:1.5rem;padding:1.7rem;
-  transition:all .5s cubic-bezier(.32,.72,0,1)}
-.sk-cat:hover{border-color:rgba(0,180,216,.24);transform:translateY(-4px)}
-.sk-cat-title{font-size:.67rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);
-  margin-bottom:1.2rem;display:flex;align-items:center;gap:.45rem}
-.sk-ic{width:26px;height:26px;border-radius:7px;background:rgba(0,180,216,.09);
-  display:flex;align-items:center;justify-content:center}
-.sk-item{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem}
-.sk-item:last-of-type{margin-bottom:0}
-.sk-hd{display:flex;justify-content:space-between;align-items:center}
-.sk-name{font-size:.83rem;font-weight:500;color:var(--text)}
-.sk-pct{font-size:.72rem;color:var(--muted);font-weight:600}
-.sk-bg{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:9999px;overflow:hidden}
-.sk-fill{height:100%;border-radius:9999px;background:linear-gradient(90deg,var(--teal),var(--emerald));
-  width:0%;transition:width 1.3s cubic-bezier(.32,.72,0,1)}
+/* ─── DEVELOPER SECTION ─────────────────────────────────── */
+.dev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.85rem;margin-top:2.5rem}
+.dev-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:1.25rem;padding:1.6rem;
+  position:relative;overflow:hidden;
+  transition:all .45s cubic-bezier(.32,.72,0,1);
+}
+.dev-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(56,189,248,.04) 0%,transparent 60%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.dev-card:hover{border-color:var(--border-glow);transform:translateY(-6px);box-shadow:0 10px 44px rgba(56,189,248,.12),0 0 0 1px rgba(56,189,248,.1)}
+.dev-card:hover::after{opacity:1}
+.dev-card.em:hover{border-color:rgba(52,211,153,.4);box-shadow:0 0 35px rgba(52,211,153,.09)}
+.dev-card.em::after{background:linear-gradient(135deg,rgba(52,211,153,.04) 0%,transparent 60%)}
+.dev-card.pur:hover{border-color:rgba(167,139,250,.4);box-shadow:0 0 35px rgba(167,139,250,.09)}
+.dev-card.pur::after{background:linear-gradient(135deg,rgba(167,139,250,.04) 0%,transparent 60%)}
+.dev-icon{
+  width:46px;height:46px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;
+  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.16);color:var(--sky);
+}
+.dev-icon.em{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.16);color:var(--em)}
+.dev-icon.pur{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.16);color:var(--pur)}
+.dev-icon.amb{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.16);color:var(--amb)}
+.dev-tag{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);margin-bottom:.5rem}
+.dev-tag.em{color:var(--em)}.dev-tag.pur{color:var(--pur)}.dev-tag.amb{color:var(--amb)}
+.dev-title{font-family:var(--head);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.6rem;letter-spacing:-.01em}
+.dev-desc{font-size:.83rem;color:var(--muted);line-height:1.72}
+.dev-badges{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.9rem}
+.dbadge{font-size:.65rem;font-weight:600;letter-spacing:.06em;background:var(--bg3);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:.22rem .55rem;color:var(--text2)}
 
-/* TIMELINE */
-.timeline{position:relative;margin-top:2.75rem;padding-left:2rem}
-.timeline::before{content:'';position:absolute;left:0;top:.5rem;bottom:0;width:1px;
-  background:linear-gradient(180deg,var(--teal) 0%,rgba(0,180,216,.08) 100%)}
-.tl-item{position:relative;margin-bottom:2.2rem;padding-left:1.4rem}
-.tl-item::before{content:'';position:absolute;left:-2.5rem;top:.55rem;width:9px;height:9px;
-  border-radius:50%;background:var(--teal);box-shadow:0 0 10px rgba(0,180,216,.55)}
-.tl-meta{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem;flex-wrap:wrap}
-.tl-period{font-size:.7rem;font-weight:700;letter-spacing:.08em;color:var(--teal);
-  background:rgba(0,180,216,.08);border:1px solid rgba(0,180,216,.15);padding:.22rem .65rem;border-radius:9999px}
+/* ─── TIMELINE ──────────────────────────────────────────── */
+.timeline{position:relative;margin-top:2.5rem;padding-left:2.25rem}
+.timeline::before{content:'';position:absolute;left:.5px;top:.5rem;bottom:0;width:1px;background:linear-gradient(180deg,var(--sky) 0%,rgba(56,189,248,.06) 100%)}
+.tl-item{position:relative;margin-bottom:2rem}
+.tl-item::before{
+  content:'';position:absolute;left:-2.25rem;top:.6rem;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--sky);
+  box-shadow:0 0 12px rgba(56,189,248,.6);
+}
+.tl-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:1.15rem;padding:1.5rem 1.65rem;
+  transition:all .45s cubic-bezier(.32,.72,0,1);
+}
+.tl-card:hover{border-color:var(--border-glow);transform:translateX(8px);box-shadow:0 4px 32px rgba(56,189,248,.08)}
+.tl-meta{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:.75rem}
+.tl-period{
+  font-size:.68rem;font-weight:700;letter-spacing:.08em;color:var(--sky);
+  background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.15);
+  padding:.2rem .65rem;border-radius:9999px;
+}
 .tl-co{font-size:.76rem;color:var(--muted);font-weight:500}
-.tl-role{font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.55rem;letter-spacing:-.01em}
-.tl-desc{font-size:.86rem;color:#8A9BB8;line-height:1.78}
-.tl-card{background:var(--card);border:1px solid var(--cb);border-radius:1.2rem;padding:1.5rem 1.65rem;
-  transition:all .5s cubic-bezier(.32,.72,0,1)}
-.tl-card:hover{border-color:rgba(0,180,216,.2);transform:translateX(5px)}
+.tl-role{font-family:var(--head);font-size:1.08rem;font-weight:700;color:var(--text);margin-bottom:.5rem;letter-spacing:-.01em}
+.tl-desc{font-size:.84rem;color:#94a3b8;line-height:1.78}
 
-/* EDU */
-.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.9rem;margin-top:2.75rem}
-.edu-card{background:var(--card);border:1px solid var(--cb);border-radius:1.5rem;padding:1.65rem;
-  transition:all .5s cubic-bezier(.32,.72,0,1)}
-.edu-card:hover{border-color:rgba(6,214,160,.24);transform:translateY(-4px)}
-.edu-yr{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--emerald);margin-bottom:.55rem}
-.edu-title{font-size:.97rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:.35rem}
-.edu-inst{font-size:.78rem;color:var(--muted)}
-.badge{display:inline-flex;align-items:center;gap:.35rem;border-radius:9999px;padding:.22rem .65rem;
-  font-size:.63rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:.9rem}
-.badge.g{background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.15);color:var(--emerald)}
-.badge.t{background:rgba(0,180,216,.08);border:1px solid rgba(0,180,216,.15);color:var(--teal)}
+/* ─── EDUCATION ─────────────────────────────────────────── */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.85rem;margin-top:2.5rem}
+.edu-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:1.25rem;padding:1.6rem;
+  transition:all .45s cubic-bezier(.32,.72,0,1);
+}
+.edu-card:hover{border-color:rgba(52,211,153,.35);transform:translateY(-3px);box-shadow:0 0 28px rgba(52,211,153,.07)}
+.edu-yr{font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--em);margin-bottom:.5rem}
+.edu-title{font-family:var(--head);font-size:.95rem;font-weight:700;color:var(--text);line-height:1.38;margin-bottom:.32rem}
+.edu-inst{font-size:.77rem;color:var(--muted)}
+.edu-badge{display:inline-flex;align-items:center;gap:.3rem;border-radius:9999px;padding:.2rem .62rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:.85rem}
+.eb-t{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.15);color:var(--sky)}
+.eb-g{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);color:var(--em)}
+.eb-a{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.15);color:var(--amb);animation:glow-pulse 2.5s ease-in-out infinite}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}50%{box-shadow:0 0 10px rgba(251,191,36,.2)}}
 
-/* PORTFOLIO */
-.pillar-hd{display:flex;align-items:center;gap:.9rem;margin-bottom:1.4rem}
-.pillar-badge{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;
-  padding:.38rem .95rem;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.pb-t{background:rgba(0,180,216,.1);border:1px solid rgba(0,180,216,.2);color:var(--teal)}
-.pb-g{background:rgba(6,214,160,.1);border:1px solid rgba(6,214,160,.2);color:var(--emerald)}
-.pb-p{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:var(--purple)}
-.pillar-line{flex:1;height:1px;background:rgba(255,255,255,.06)}
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.85rem}
-.proj-card{background:var(--card);border:1px solid var(--cb);border-radius:1.2rem;padding:1.4rem;
-  display:flex;flex-direction:column;gap:.65rem;text-decoration:none;color:inherit;position:relative;overflow:hidden;
-  transition:all .5s cubic-bezier(.32,.72,0,1)}
-.proj-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,180,216,.04) 0%,transparent 60%);
-  opacity:0;transition:opacity .5s cubic-bezier(.32,.72,0,1)}
-.proj-card:hover{border-color:rgba(0,180,216,.28);transform:translateY(-5px)}
-.proj-card:hover::after{opacity:1}
-.proj-card.g:hover{border-color:rgba(6,214,160,.28)}
-.proj-card.g::after{background:linear-gradient(135deg,rgba(6,214,160,.04) 0%,transparent 60%)}
-.proj-card.p:hover{border-color:rgba(167,139,250,.28)}
-.proj-card.p::after{background:linear-gradient(135deg,rgba(167,139,250,.04) 0%,transparent 60%)}
-.proj-num{font-size:.63rem;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
-.proj-type{font-size:.65rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:.18rem .58rem;
-  border-radius:9999px;width:fit-content}
-.pt-t{background:rgba(0,180,216,.08);border:1px solid rgba(0,180,216,.13);color:var(--teal)}
-.pt-g{background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.13);color:var(--emerald)}
-.pt-p{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.13);color:var(--purple)}
-.proj-title{font-size:.98rem;font-weight:700;color:var(--text);line-height:1.3}
-.proj-desc{font-size:.8rem;color:var(--muted);line-height:1.68}
-.proj-link{display:inline-flex;align-items:center;gap:.38rem;font-size:.73rem;font-weight:600;
-  color:var(--teal);margin-top:auto;transition:gap .3s cubic-bezier(.32,.72,0,1)}
-.proj-link.g{color:var(--emerald)}
-.proj-link.p{color:var(--purple)}
-.proj-card:hover .proj-link{gap:.58rem}
+/* ─── PORTFOLIO ─────────────────────────────────────────── */
+.pillar-hd{display:flex;align-items:center;gap:.85rem;margin-bottom:1.25rem}
+.pillar-badge{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;padding:.32rem .9rem;font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.pb-sky{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);color:var(--sky)}
+.pb-em{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:var(--em)}
+.pb-pur{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:var(--pur)}
+.pline{flex:1;height:1px;background:rgba(255,255,255,.05)}
+.pj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.75rem;margin-bottom:2.5rem}
+.pj-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:1.1rem;padding:1.35rem;
+  display:flex;flex-direction:column;gap:.55rem;
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:all .45s cubic-bezier(.32,.72,0,1);
+}
+.pj-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(56,189,248,.04) 0%,transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.pj-card:hover{border-color:var(--border-glow);transform:translateY(-4px);box-shadow:0 0 28px rgba(56,189,248,.08)}
+.pj-card:hover::after{opacity:1}
+.pj-card.em:hover{border-color:rgba(52,211,153,.35);box-shadow:0 0 28px rgba(52,211,153,.08)}
+.pj-card.em::after{background:linear-gradient(135deg,rgba(52,211,153,.04) 0%,transparent 60%)}
+.pj-card.pur:hover{border-color:rgba(167,139,250,.35);box-shadow:0 0 28px rgba(167,139,250,.08)}
+.pj-card.pur::after{background:linear-gradient(135deg,rgba(167,139,250,.04) 0%,transparent 60%)}
+.pj-num{font-size:.61rem;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.pj-type{font-size:.63rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.17rem .55rem;border-radius:9999px;width:fit-content}
+.pt-sky{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.13);color:var(--sky)}
+.pt-em{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.13);color:var(--em)}
+.pt-pur{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.13);color:var(--pur)}
+.pj-title{font-family:var(--head);font-size:.97rem;font-weight:700;color:var(--text);line-height:1.28}
+.pj-desc{font-size:.79rem;color:var(--muted);line-height:1.66}
+.pj-link{display:inline-flex;align-items:center;gap:.38rem;font-size:.73rem;font-weight:600;color:var(--sky);margin-top:auto;transition:gap .3s}
+.pj-link.em{color:var(--em)}.pj-link.pur{color:var(--pur)}
+.pj-card:hover .pj-link{gap:.58rem}
 
-/* REFERENCES */
-.refs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.9rem;margin-top:2.75rem}
-.ref-card{background:var(--card);border:1px solid var(--cb);border-radius:1.5rem;padding:1.7rem;
-  transition:all .5s cubic-bezier(.32,.72,0,1)}
-.ref-card:hover{border-color:rgba(0,180,216,.22);transform:translateY(-3px)}
-.ref-av{width:46px;height:46px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:#050A14;margin-bottom:.9rem}
-.ref-name{font-size:.98rem;font-weight:700;color:var(--text);margin-bottom:.22rem}
-.ref-role{font-size:.78rem;color:var(--muted);margin-bottom:.9rem}
-.ref-phone{display:flex;align-items:center;gap:.45rem;font-size:.83rem;color:var(--teal);font-weight:500}
+/* ─── WIP PROJECT CARDS ─────────────────────────────────── */
+a.pj-card[href="#"]{cursor:default}
+a.pj-card[href="#"] .pj-link{opacity:0;pointer-events:none}
+a.pj-card[href="#"]::before{
+  content:'En desarrollo';
+  position:absolute;top:.75rem;right:.75rem;
+  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);
+  color:var(--amb);border-radius:9999px;padding:.18rem .55rem;
+  pointer-events:none;
+}
 
-/* CONTACT */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.9rem;margin-top:2.75rem}
-.contact-card{background:var(--card);border:1px solid var(--cb);border-radius:1.5rem;padding:1.45rem;
-  display:flex;flex-direction:column;gap:.45rem;text-decoration:none;color:inherit;
-  transition:all .5s cubic-bezier(.32,.72,0,1)}
-.contact-card:hover{border-color:rgba(0,180,216,.28);transform:translateY(-4px);background:rgba(0,180,216,.04)}
-.contact-ic{width:38px;height:38px;border-radius:11px;background:rgba(0,180,216,.09);
-  border:1px solid rgba(0,180,216,.14);display:flex;align-items:center;justify-content:center;
-  color:var(--teal);margin-bottom:.4rem}
-.contact-lb{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.contact-vl{font-size:.88rem;font-weight:600;color:var(--text)}
+/* ─── REFERENCES ────────────────────────────────────────── */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.85rem;margin-top:2.5rem}
+.ref-card{background:var(--bg2);border:1px solid var(--border);border-radius:1.25rem;padding:1.65rem;transition:all .45s cubic-bezier(.32,.72,0,1)}
+.ref-card:hover{border-color:var(--border-glow);transform:translateY(-3px)}
+.ref-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:1rem;font-weight:800;color:#020817;margin-bottom:.85rem}
+.ref-name{font-family:var(--head);font-size:.97rem;font-weight:700;color:var(--text);margin-bottom:.22rem}
+.ref-occ{font-size:.78rem;color:var(--muted);margin-bottom:.85rem}
+.ref-phone{display:flex;align-items:center;gap:.4rem;font-size:.83rem;color:var(--sky);font-weight:500}
 
-/* FOOTER */
-footer{text-align:center;padding:2.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.05);
-  color:var(--muted);font-size:.78rem}
+/* ─── CONTACT ───────────────────────────────────────────── */
+.ct-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.85rem;margin-top:2.5rem}
+.ct-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:1.25rem;padding:1.4rem;
+  display:flex;flex-direction:column;gap:.4rem;cursor:pointer;
+  transition:all .45s cubic-bezier(.32,.72,0,1);
+}
+.ct-card:hover{border-color:var(--border-glow);transform:translateY(-4px);background:rgba(56,189,248,.04)}
+.ct-ico{width:36px;height:36px;border-radius:10px;background:rgba(56,189,248,.09);border:1px solid rgba(56,189,248,.14);display:flex;align-items:center;justify-content:center;color:var(--sky);margin-bottom:.4rem}
+.ct-lb{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ct-vl{font-size:.87rem;font-weight:600;color:var(--text)}
+.ct-card.av .ct-ico{background:rgba(52,211,153,.09);border-color:rgba(52,211,153,.14);color:var(--em)}
+.ct-card.av .ct-vl{color:var(--em)}
+.ct-cta{text-align:center;margin-top:2.5rem}
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  nav{width:calc(100% - 2rem);padding:.4rem .4rem .4rem 1.1rem}
-  .nav-links{display:none}
-  .hamburger{display:flex}
-  section{padding:4rem 1rem}
-  .s8,.s4,.s6,.s5,.s7{grid-column:span 12}
+/* ─── FOOTER ────────────────────────────────────────────── */
+footer{text-align:center;padding:2.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.05);color:var(--muted);font-size:.78rem;position:relative;z-index:2}
+footer strong{color:var(--text2)}
+
+/* ─── PRINT / PDF ───────────────────────────────────────── */
+@media print{
+  .bg-grid,.noise,nav,.mob-overlay,.hero-actions,.marquee-wrap,.btn-primary,.btn-ghost{display:none!important}
+  body{background:#fff;color:#111;font-size:11pt}
+  .hero{min-height:auto;padding:2rem 1rem 1.5rem;grid-template-columns:1fr}
+  .hero-name{font-size:2.2rem;color:#111}
+  .hero-right{display:none}
+  .sec{padding:1.5rem 1rem}
+  .card,.tl-card,.dev-card,.edu-card,.ref-card,.pj-card{border:1px solid #ddd;box-shadow:none;page-break-inside:avoid}
+  .pj-link{color:#0369a1}
+  footer{border-top:1px solid #ddd;color:#555}
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────────── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:center;padding:7rem 1.2rem 3rem}
+  .hero-left{align-items:center}
+  .hero-role,.hero-desc{text-align:center;max-width:100%}
+  .hero-right{margin-top:.5rem}
+  .c8,.c7,.c6,.c5,.c4{grid-column:span 12}
   .bento{grid-template-columns:1fr;gap:.75rem}
-  .timeline{padding-left:1.5rem}
-  .tl-item{padding-left:.9rem}
-  .tl-item::before{left:-2rem}
-  .proj-grid,.skills-grid,.edu-grid,.refs-grid,.contact-grid{grid-template-columns:1fr}
-  .pillar-hd{flex-wrap:wrap}
-  .pillar-line{display:none}
+  nav .nav-links{display:none}
+  .hamburger{display:flex}
+}
+@media(max-width:600px){
+  .sec{padding:4rem 1rem}
+  .hero-name{font-size:clamp(2.2rem,8vw,3.2rem)}
+  .sk-grid,.dev-grid,.edu-grid,.pj-grid,.ref-grid,.ct-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+<div class="bg-grid"></div>
+<div class="noise"></div>
 
-<!-- NAV -->
+<!-- ─── NAV ─────────────────────────────────────────────── -->
 <nav id="nav">
+  <span class="nav-logo">DM</span>
   <ul class="nav-links">
     <li><a href="#perfil">Perfil</a></li>
     <li><a href="#habilidades">Habilidades</a></li>
+    <li><a href="#desarrollo">Digital</a></li>
     <li><a href="#experiencia">Experiencia</a></li>
     <li><a href="#portafolio">Portafolio</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <a href="Hoja de David Jose Monsalve Guzman.pdf" download class="nav-cta">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Descargar CV
   </a>
   <button class="hamburger" id="hbg" aria-label="Menú">
@@ -325,652 +487,1074 @@ footer{text-align:center;padding:2.5rem 1.5rem;border-top:1px solid rgba(255,255
   </button>
 </nav>
 
-<div class="mob-menu" id="mobMenu">
-  <a href="#perfil"      onclick="closeMenu()">Perfil</a>
-  <a href="#habilidades" onclick="closeMenu()">Habilidades</a>
-  <a href="#experiencia" onclick="closeMenu()">Experiencia</a>
-  <a href="#educacion"   onclick="closeMenu()">Educación</a>
-  <a href="#portafolio"  onclick="closeMenu()">Portafolio</a>
-  <a href="#contacto"    onclick="closeMenu()">Contacto</a>
+<!-- ─── MOBILE MENU ─────────────────────────────────────── -->
+<div class="mob-overlay" id="mob">
+  <a href="#perfil"       onclick="closeM()">Perfil</a>
+  <a href="#habilidades"  onclick="closeM()">Habilidades</a>
+  <a href="#desarrollo"   onclick="closeM()">Digital</a>
+  <a href="#experiencia"  onclick="closeM()">Experiencia</a>
+  <a href="#portafolio"   onclick="closeM()">Portafolio</a>
+  <a href="#contacto"     onclick="closeM()">Contacto</a>
 </div>
 
-<!-- HERO -->
-<section class="hero" id="inicio">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-
-  <div class="hero-eyebrow"><div class="dot"></div>Disponible para nuevas oportunidades</div>
-
-  <h1 class="hero-name">David José<br>Monsalve Guzmán</h1>
-
-  <p class="hero-sub">
-    <strong>Especialista en Gestión de Flotas</strong> · Analista de Datos<br>
-    Power BI · AppSheet · KPI · +14 años de experiencia
-  </p>
-
-  <div class="hero-actions">
-    <a href="#portafolio" class="btn-p">
-      Ver Portafolio
-      <span class="btn-icon">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-      </span>
-    </a>
-    <a href="#contacto" class="btn-s">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-      Contactar
-    </a>
+<!-- ─── HERO ─────────────────────────────────────────────── -->
+<div style="max-width:1200px;margin:0 auto">
+<div class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="dot-pulse"></div>
+      Disponible para nuevas oportunidades
+    </div>
+    <h1 class="hero-name" id="heroName">
+      David José<br>
+      <span>Monsalve</span> Guzmán
+    </h1>
+    <p class="hero-role">
+      <span id="roleText" class="role-cycling"></span><span class="cursor-blink"></span>
+    </p>
+    <p class="hero-desc">
+      +14 años liderando flotas y procesos logísticos. Especialista en automatización de datos,
+      dashboards Power BI y desarrollo de aplicaciones AppSheet para entornos operativos exigentes.
+    </p>
+    <div class="hero-actions">
+      <a href="#portafolio" class="btn-primary">
+        Ver Portafolio
+        <span class="bi">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </span>
+      </a>
+      <a href="#contacto" class="btn-ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.99.36 1.95.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6z"/></svg>
+        Contactar
+      </a>
+      <a href="Hoja de David Jose Monsalve Guzman.pdf" download class="btn-ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        CV PDF
+      </a>
+    </div>
   </div>
 
-  <div class="hero-photo">
-    <div class="photo-outer">
+  <div class="hero-right">
+    <div class="photo-wrap">
       <div class="photo-inner">
         <img src="../DOC/wmremove-transformed.png" alt="David José Monsalve Guzmán"
              onerror="this.outerHTML='<div class=\'photo-fallback\'>DM</div>'">
       </div>
     </div>
+    <div class="hero-chips">
+      <div class="hchip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Santa Marta, Colombia
+      </div>
+      <div class="hchip g">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg>
+        Power BI Specialist
+      </div>
+      <div class="hchip p">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        AppSheet Developer
+      </div>
+      <div class="hchip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        14+ Años Experiencia
+      </div>
+    </div>
   </div>
+</div>
+</div>
+
+<!-- ─── MARQUEE ─────────────────────────────────────────── -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="mtrack">
+    <span class="mtag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg>Power BI</span>
+    <span class="msep">·</span>
+    <span class="mtag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>AppSheet</span>
+    <span class="msep">·</span>
+    <span class="mtag">Excel Avanzado</span>
+    <span class="msep">·</span>
+    <span class="mtag">KPI Reporting</span>
+    <span class="msep">·</span>
+    <span class="mtag">DPO Platform</span>
+    <span class="msep">·</span>
+    <span class="mtag">Google Sheets</span>
+    <span class="msep">·</span>
+    <span class="mtag">Gestión de Flotas</span>
+    <span class="msep">·</span>
+    <span class="mtag">Automatización</span>
+    <span class="msep">·</span>
+    <span class="mtag">Dashboard Design</span>
+    <span class="msep">·</span>
+    <span class="mtag">OTIF Analytics</span>
+    <span class="msep">·</span>
+    <span class="mtag">HTML / CSS</span>
+    <span class="msep">·</span>
+    <span class="mtag">Control Documental</span>
+    <span class="msep">·</span>
+    <span class="mtag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg>Power BI</span>
+    <span class="msep">·</span>
+    <span class="mtag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>AppSheet</span>
+    <span class="msep">·</span>
+    <span class="mtag">Excel Avanzado</span>
+    <span class="msep">·</span>
+    <span class="mtag">KPI Reporting</span>
+    <span class="msep">·</span>
+    <span class="mtag">DPO Platform</span>
+    <span class="msep">·</span>
+    <span class="mtag">Google Sheets</span>
+    <span class="msep">·</span>
+    <span class="mtag">Gestión de Flotas</span>
+    <span class="msep">·</span>
+    <span class="mtag">Automatización</span>
+    <span class="msep">·</span>
+    <span class="mtag">Dashboard Design</span>
+    <span class="msep">·</span>
+    <span class="mtag">OTIF Analytics</span>
+    <span class="msep">·</span>
+    <span class="mtag">HTML / CSS</span>
+    <span class="msep">·</span>
+    <span class="mtag">Control Documental</span>
+    <span class="msep">·</span>
+  </div>
+</div>
+
+<!-- ─── PERFIL ───────────────────────────────────────────── -->
+<section class="sec" id="perfil">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Sobre mí</div>
+    <h2 class="sec-title">Perfil Profesional</h2>
+  </div>
+
+  <div class="bento">
+    <div class="c8 card reveal">
+      <div class="eyebrow" style="margin-bottom:.9rem">Quién soy</div>
+      <p class="profile-p">
+        Especialista en <strong style="color:var(--sky)">Gestión de Flotas y Coordinación de Mantenimiento</strong>
+        con más de 14 años en el sector del parque automotor. Lidero equipos, gestiono mantenimiento
+        preventivo y correctivo, y optimizo procesos mediante automatización digital y tecnología.
+      </p>
+      <p class="profile-p">
+        Especialista en <strong style="color:var(--em)">Power BI y Analítica de Datos</strong>
+        con 18+ dashboards entregados en producción. Dominio de AppSheet para desarrollo de aplicaciones
+        móviles y web, integración con Google Workspace y automatización de flujos operativos completos.
+      </p>
+      <p class="profile-p" style="margin-bottom:1.3rem">
+        Desarrollador <strong style="color:var(--pur)">Full-Stack</strong> con proyectos en producción que integran
+        <strong style="color:var(--pur)">React, Next.js, Node.js, Python y Flutter</strong>. Experiencia construyendo
+        chatbots y plataformas con inteligencia artificial (Claude de Anthropic, GPT-4 de OpenAI),
+        bases de datos en la nube (Supabase, Firestore) y despliegue en Vercel. Combino la visión
+        operativa del negocio con la capacidad técnica de construir soluciones digitales reales.
+      </p>
+      <div class="pills">
+        <span class="pill">Gestión de Flotas</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">AppSheet</span>
+        <span class="pill">KPI Reporting</span>
+        <span class="pill">DPO</span>
+        <span class="pill em">React / Next.js</span>
+        <span class="pill em">Node.js / Python</span>
+        <span class="pill em">Supabase</span>
+        <span class="pill em">Claude AI / GPT-4</span>
+        <span class="pill pur">Flutter / Dart</span>
+        <span class="pill pur">TypeScript</span>
+        <span class="pill pur">Vercel</span>
+        <span class="pill">Automatización</span>
+      </div>
+    </div>
+
+    <div class="c4 card reveal" style="display:flex;flex-direction:column;justify-content:space-between;gap:1.1rem">
+      <div>
+        <div class="stat-val" id="s1">0</div>
+        <div class="stat-lbl">Años de experiencia</div>
+      </div>
+      <div class="sdivider"></div>
+      <div>
+        <div class="stat-val" id="s2">0</div>
+        <div class="stat-lbl">Dashboards & Apps entregados</div>
+      </div>
+      <div class="sdivider"></div>
+      <div>
+        <div class="stat-val" id="s3">0</div>
+        <div class="stat-lbl">Empresas en sector logístico</div>
+      </div>
+    </div>
+
+    <div class="c6 card reveal">
+      <div class="eyebrow" style="margin-bottom:.9rem">Datos de Contacto</div>
+      <div class="info-row">
+        <div class="iico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.99.36 1.95.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6z"/></svg></div>
+        <div><div class="ilb">Teléfono</div><div class="ivl">324 714 6958</div></div>
+      </div>
+      <div class="info-row">
+        <div class="iico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="ilb">Email</div><div class="ivl">odinprojecapp@gmail.com</div></div>
+      </div>
+      <div class="info-row">
+        <div class="iico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="ilb">Ubicación</div><div class="ivl">Cll 4 12-41 Pescaito · Santa Marta, Magdalena</div></div>
+      </div>
+      <div class="info-row">
+        <div class="iico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div><div class="ilb">Nacimiento</div><div class="ivl">19 de Enero de 1987</div></div>
+      </div>
+      <div class="info-row">
+        <div class="iico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div><div class="ilb">Documento</div><div class="ivl">CC 1.082.853.085 — Santa Marta</div></div>
+      </div>
+    </div>
+
+    <div class="c6 card reveal" style="background:linear-gradient(135deg,rgba(56,189,248,.055) 0%,rgba(52,211,153,.035) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.2rem;min-height:260px">
+      <div style="width:70px;height:70px;border-radius:50%;overflow:hidden;border:2px solid rgba(56,189,248,.3);background:rgba(56,189,248,.08)">
+        <img src="../DOC/logo_circular_centrado.png" alt="Integral Service M&H"
+             style="width:100%;height:100%;object-fit:cover"
+             onerror="this.outerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:1.1rem;font-weight:800;color:var(--sky)\'>IS</div>'">
+      </div>
+      <div>
+        <div style="font-family:var(--head);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.3rem">Integral Service M&amp;H</div>
+        <div style="font-size:.78rem;color:var(--muted)">Consultoría · Datos · Power BI · Automatización</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.45rem;background:rgba(52,211,153,.09);border:1px solid rgba(52,211,153,.2);border-radius:9999px;padding:.3rem .9rem;font-size:.68rem;font-weight:700;color:var(--em);letter-spacing:.1em;text-transform:uppercase">
+        <div class="dot-pulse" style="background:var(--em)"></div>
+        Disponible · Santa Marta
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 
 <div class="divider"></div>
 
-<!-- PERFIL -->
-<section id="perfil">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Sobre mí</div>
-      <h2 class="sec-title">Especialista con visión<br>analítica y tecnológica</h2>
-    </div>
-
-    <div class="bento">
-      <!-- PERFIL TEXTO -->
-      <div class="s8 d-outer reveal d1">
-        <div class="d-inner">
-          <div class="eyebrow" style="margin-bottom:1.1rem">Perfil Profesional</div>
-          <p style="font-size:1.02rem;line-height:1.82;color:#B8C8DC;margin-bottom:1rem">
-            Especialista en <strong style="color:var(--teal)">Gestión de Flotas y Coordinación de Mantenimiento</strong>
-            con más de 14 años de experiencia en el sector del parque automotor. Lidero equipos, gestiono mantenimiento
-            preventivo y correctivo de flotas, y optimizo procesos mediante automatización y tecnología.
-          </p>
-          <p style="font-size:1.02rem;line-height:1.82;color:#B8C8DC;margin-bottom:1.4rem">
-            Actualmente en formación como <strong style="color:var(--emerald)">Especialista en Power BI y Analista de Datos</strong>,
-            combinando experiencia operativa con inteligencia empresarial para transformar datos en decisiones estratégicas.
-          </p>
-          <div class="pills">
-            <span class="pill">Gestión de Flotas</span>
-            <span class="pill">Power BI</span>
-            <span class="pill">KPI Reporting</span>
-            <span class="pill">AppSheet</span>
-            <span class="pill">Automatización</span>
-            <span class="pill">DPO</span>
-            <span class="pill">Auditorías</span>
-            <span class="pill">Control Documental</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- STATS -->
-      <div class="s4 card reveal d2" style="display:flex;flex-direction:column;justify-content:space-between;gap:1.2rem">
-        <div>
-          <div class="stat-n">14+</div>
-          <div class="stat-l">Años de experiencia</div>
-        </div>
-        <div class="divline"></div>
-        <div>
-          <div class="stat-n">18</div>
-          <div class="stat-l">Dashboards & Apps entregados</div>
-        </div>
-        <div class="divline"></div>
-        <div>
-          <div class="stat-n">4</div>
-          <div class="stat-l">Empresas en sector logístico</div>
-        </div>
-      </div>
-
-      <!-- DATOS PERSONALES -->
-      <div class="s6 card reveal d2">
-        <div class="eyebrow" style="margin-bottom:1rem">Datos Personales</div>
-        <div class="info-row">
-          <div class="info-ic">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div><div class="info-lb">Ubicación</div><div class="info-vl">Santa Marta, Magdalena · Cll 4 12-41 Pescaito</div></div>
-        </div>
-        <div class="info-row">
-          <div class="info-ic">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <div><div class="info-lb">Nacimiento</div><div class="info-vl">19 de Enero de 1987 (38 años)</div></div>
-        </div>
-        <div class="info-row">
-          <div class="info-ic">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          </div>
-          <div><div class="info-lb">Teléfono</div><div class="info-vl">324 714 6958</div></div>
-        </div>
-        <div class="info-row">
-          <div class="info-ic">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div><div class="info-lb">Email</div><div class="info-vl">odinprojecapp@gmail.com</div></div>
-        </div>
-        <div class="info-row">
-          <div class="info-ic">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-          </div>
-          <div><div class="info-lb">Documento</div><div class="info-vl">CC 1.082.853.085 — Santa Marta</div></div>
-        </div>
-      </div>
-
-      <!-- LOGO / DISPONIBLE -->
-      <div class="s6 card reveal d3"
-           style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:1.4rem;min-height:260px;background:linear-gradient(135deg,rgba(0,180,216,.055) 0%,rgba(6,214,160,.035) 100%)">
-        <div style="width:76px;height:76px;border-radius:50%;overflow:hidden;border:2px solid rgba(0,180,216,.28);background:rgba(0,180,216,.07)">
-          <img src="../DOC/logo_circular_centrado.png" alt="Logo Integral Service M&H"
-               style="width:100%;height:100%;object-fit:cover"
-               onerror="this.outerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;color:var(--teal)\'>DM</div>'">
-        </div>
-        <div>
-          <div style="font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.35rem">Integral Service M&amp;H</div>
-          <div style="font-size:.78rem;color:var(--muted)">Consultoría · Datos · Power BI · Automatización</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:.45rem;background:rgba(6,214,160,.09);border:1px solid rgba(6,214,160,.18);border-radius:9999px;padding:.35rem .95rem;font-size:.7rem;font-weight:700;color:var(--emerald);letter-spacing:.1em;text-transform:uppercase">
-          <div style="width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite"></div>
-          Disponible · Santa Marta
-        </div>
-      </div>
-    </div>
+<!-- ─── HABILIDADES ──────────────────────────────────────── -->
+<section class="sec" id="habilidades">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Competencias</div>
+    <h2 class="sec-title">Habilidades & Herramientas</h2>
+    <p class="sec-sub">Combinación de experiencia operativa con dominio de herramientas tecnológicas para análisis, visualización y automatización de procesos.</p>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- HABILIDADES -->
-<section id="habilidades">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Competencias</div>
-      <h2 class="sec-title">Habilidades & Herramientas</h2>
-      <p class="sec-sub">Combinación única de experiencia operativa con dominio de herramientas tecnológicas para análisis, visualización y automatización.</p>
+  <div class="sk-grid">
+    <div class="card reveal">
+      <div class="sk-title">
+        <div class="sk-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg></div>
+        Datos & Analítica
+      </div>
+      <div class="sk-item" data-pct="92"><div class="sk-hd"><span class="sk-name">Power BI</span><span class="sk-pct">92%</span></div><div class="sk-bar"><div class="sk-fill"></div></div></div>
+      <div class="sk-item" data-pct="87"><div class="sk-hd"><span class="sk-name">Excel Avanzado</span><span class="sk-pct">87%</span></div><div class="sk-bar"><div class="sk-fill"></div></div></div>
+      <div class="sk-item" data-pct="82"><div class="sk-hd"><span class="sk-name">Google Sheets</span><span class="sk-pct">82%</span></div><div class="sk-bar"><div class="sk-fill"></div></div></div>
+      <div class="sk-item" data-pct="80"><div class="sk-hd"><span class="sk-name">KPI & Reportes</span><span class="sk-pct">80%</span></div><div class="sk-bar"><div class="sk-fill"></div></div></div>
     </div>
 
-    <div class="skills-grid">
-      <div class="sk-cat reveal d1">
-        <div class="sk-cat-title">
-          <div class="sk-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg></div>
-          Datos & Analítica
-        </div>
-        <div class="sk-item" data-pct="90"><div class="sk-hd"><span class="sk-name">Power BI</span><span class="sk-pct">90%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="85"><div class="sk-hd"><span class="sk-name">Excel Avanzado</span><span class="sk-pct">85%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="80"><div class="sk-hd"><span class="sk-name">Google Sheets</span><span class="sk-pct">80%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="78"><div class="sk-hd"><span class="sk-name">KPI & Reportes</span><span class="sk-pct">78%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
+    <div class="card reveal">
+      <div class="sk-title em">
+        <div class="sk-ico em"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        Apps & Automatización
       </div>
+      <div class="sk-item" data-pct="90"><div class="sk-hd"><span class="sk-name">AppSheet</span><span class="sk-pct">90%</span></div><div class="sk-bar"><div class="sk-fill em"></div></div></div>
+      <div class="sk-item" data-pct="84"><div class="sk-hd"><span class="sk-name">DPO Platform</span><span class="sk-pct">84%</span></div><div class="sk-bar"><div class="sk-fill em"></div></div></div>
+      <div class="sk-item" data-pct="78"><div class="sk-hd"><span class="sk-name">Automatización de Procesos</span><span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill em"></div></div></div>
+      <div class="sk-item" data-pct="75"><div class="sk-hd"><span class="sk-name">Control Documental</span><span class="sk-pct">75%</span></div><div class="sk-bar"><div class="sk-fill em"></div></div></div>
+    </div>
 
-      <div class="sk-cat reveal d2">
-        <div class="sk-cat-title">
-          <div class="sk-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-          Apps & Automatización
-        </div>
-        <div class="sk-item" data-pct="88"><div class="sk-hd"><span class="sk-name">AppSheet</span><span class="sk-pct">88%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="82"><div class="sk-hd"><span class="sk-name">DPO Platform</span><span class="sk-pct">82%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="78"><div class="sk-hd"><span class="sk-name">Automatización de Procesos</span><span class="sk-pct">78%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="74"><div class="sk-hd"><span class="sk-name">Control Documental</span><span class="sk-pct">74%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
+    <div class="card reveal">
+      <div class="sk-title pur">
+        <div class="sk-ico pur"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        Gestión Operativa
       </div>
+      <div class="sk-item" data-pct="96"><div class="sk-hd"><span class="sk-name">Gestión de Flotas</span><span class="sk-pct">96%</span></div><div class="sk-bar"><div class="sk-fill pur"></div></div></div>
+      <div class="sk-item" data-pct="93"><div class="sk-hd"><span class="sk-name">Mantenimiento Preventivo</span><span class="sk-pct">93%</span></div><div class="sk-bar"><div class="sk-fill pur"></div></div></div>
+      <div class="sk-item" data-pct="88"><div class="sk-hd"><span class="sk-name">Gestión de Siniestros</span><span class="sk-pct">88%</span></div><div class="sk-bar"><div class="sk-fill pur"></div></div></div>
+      <div class="sk-item" data-pct="90"><div class="sk-hd"><span class="sk-name">Liderazgo de Equipos</span><span class="sk-pct">90%</span></div><div class="sk-bar"><div class="sk-fill pur"></div></div></div>
+    </div>
 
-      <div class="sk-cat reveal d3">
-        <div class="sk-cat-title">
-          <div class="sk-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-          Gestión Operativa
-        </div>
-        <div class="sk-item" data-pct="95"><div class="sk-hd"><span class="sk-name">Gestión de Flotas</span><span class="sk-pct">95%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="92"><div class="sk-hd"><span class="sk-name">Mantenimiento Preventivo</span><span class="sk-pct">92%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="86"><div class="sk-hd"><span class="sk-name">Gestión de Siniestros</span><span class="sk-pct">86%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
-        <div class="sk-item" data-pct="88"><div class="sk-hd"><span class="sk-name">Liderazgo de Equipos</span><span class="sk-pct">88%</span></div><div class="sk-bg"><div class="sk-fill"></div></div></div>
+    <div class="card reveal">
+      <div class="sk-title amb">
+        <div class="sk-ico amb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        Habilidades Blandas
       </div>
-
-      <div class="sk-cat reveal d4">
-        <div class="sk-cat-title">
-          <div class="sk-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+      <div class="pills" style="margin-top:0">
+        <span class="pill" style="background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14);color:var(--amb)">Liderazgo</span>
+        <span class="pill" style="background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14);color:var(--amb)">Trabajo en equipo</span>
+        <span class="pill" style="background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14);color:var(--amb)">Comunicación efectiva</span>
+        <span class="pill" style="background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14);color:var(--amb)">Mejora continua</span>
+        <span class="pill" style="background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14);color:var(--amb)">Toma de decisiones</span>
+        <span class="pill" style="background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14);color:var(--amb)">Orientado a resultados</span>
+      </div>
+      <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.05)">
+        <div class="sk-title" style="margin-bottom:.6rem;font-size:.6rem;color:var(--muted)">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
           Herramientas Office
         </div>
-        <div class="pills" style="margin-top:0">
-          <span class="pill">Microsoft Word</span>
-          <span class="pill">PowerPoint</span>
-          <span class="pill">Google Docs</span>
-          <span class="pill">Google Slides</span>
-          <span class="pill">Alegra</span>
-          <span class="pill">Plataformas Seguros</span>
-        </div>
-        <div style="margin-top:1.3rem">
-          <div class="sk-cat-title" style="margin-bottom:.7rem;color:var(--emerald)">
-            <div class="sk-ic" style="background:rgba(6,214,160,.09)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-            Habilidades Blandas
-          </div>
-          <div class="pills">
-            <span class="pill g">Liderazgo</span>
-            <span class="pill g">Trabajo en equipo</span>
-            <span class="pill g">Comunicación efectiva</span>
-            <span class="pill g">Mejora continua</span>
-          </div>
+        <div class="pills">
+          <span class="pill">Word</span><span class="pill">PowerPoint</span><span class="pill">Google Docs</span><span class="pill">Alegra</span>
         </div>
       </div>
     </div>
   </div>
+</div>
 </section>
 
 <div class="divider"></div>
 
-<!-- EXPERIENCIA -->
-<section id="experiencia">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Trayectoria</div>
-      <h2 class="sec-title">Experiencia Laboral</h2>
-      <p class="sec-sub">14 años construyendo soluciones operativas y tecnológicas en el sector logístico y automotor.</p>
+<!-- ─── DESARROLLO DIGITAL (NEW) ─────────────────────────── -->
+<section class="sec" id="desarrollo">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Capacidades Digitales</div>
+    <h2 class="sec-title">Desarrollo Web &<br>Automatización</h2>
+    <p class="sec-sub">Más allá de la gestión operativa: construyo soluciones digitales funcionales, dashboards inteligentes y apps que automatizan procesos completos.</p>
+  </div>
+
+  <div class="dev-grid">
+    <div class="dev-card reveal">
+      <div class="dev-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      </div>
+      <div class="dev-tag">App Development</div>
+      <div class="dev-title">AppSheet — Apps Nativas</div>
+      <div class="dev-desc">Desarrollo de aplicaciones móviles y web sin código. Registro de datos, alertas automáticas de vencimiento, formularios vinculados e informes nativos integrados. 5+ apps en producción.</div>
+      <div class="dev-badges"><span class="dbadge">No-Code</span><span class="dbadge">Google Workspace</span><span class="dbadge">Móvil & Web</span><span class="dbadge">Automatización</span></div>
     </div>
 
-    <div class="timeline">
-      <div class="tl-item reveal d1">
-        <div class="tl-card">
-          <div class="tl-meta">
-            <span class="tl-period">Ago 2018 – Jul 2021</span>
-            <span class="tl-co">Soluciones Logísticas Avanzadas SAS</span>
-          </div>
-          <div class="tl-role">Coordinador de Flota</div>
-          <p class="tl-desc">Lideré el manejo administrativo y operativo de la flota vehicular. Especializado en informes KPI, automatización de procesos mediante apps, y control documental de vehículos y conductores. Logré las mejores calificaciones en auditorías DPO, destacando por eficiencia en combustible y mejora continua en los procesos logísticos.</p>
-          <div class="pills" style="margin-top:.9rem">
-            <span class="pill">KPI</span><span class="pill">DPO</span><span class="pill">Automatización</span><span class="pill">Auditorías</span><span class="pill">Control Documental</span>
-          </div>
+    <div class="dev-card em reveal">
+      <div class="dev-icon em">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg>
+      </div>
+      <div class="dev-tag em">Business Intelligence</div>
+      <div class="dev-title">Power BI — Dashboards</div>
+      <div class="dev-desc">Diseño y desarrollo de dashboards interactivos de alto nivel. Análisis OTIF, DQI, KPIs logísticos, engagement y safety. 18+ reportes entregados en entornos productivos Bavaria.</div>
+      <div class="dev-badges"><span class="dbadge">Power BI</span><span class="dbadge">DAX</span><span class="dbadge">KPI</span><span class="dbadge">Data Viz</span></div>
+    </div>
+
+    <div class="dev-card pur reveal">
+      <div class="dev-icon pur">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+      </div>
+      <div class="dev-tag pur">Full-Stack Development</div>
+      <div class="dev-title">React · Next.js · Node.js · Python</div>
+      <div class="dev-desc">Desarrollo full-stack de aplicaciones web completas. Frontend con React/Next.js y TailwindCSS. Backend con Node.js/Express y Python/Flask. Bases de datos en la nube con Supabase y Firestore. Deploy automático en Vercel.</div>
+      <div class="dev-badges"><span class="dbadge">React</span><span class="dbadge">Next.js</span><span class="dbadge">TypeScript</span><span class="dbadge">Node.js</span><span class="dbadge">Python</span><span class="dbadge">Vercel</span></div>
+    </div>
+
+    <div class="dev-card reveal">
+      <div class="dev-icon" style="background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.16);color:var(--amb)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M21 12h-2M5 12H3M17.66 17.66l-1.41-1.41M6.34 6.34L4.93 4.93"/></svg>
+      </div>
+      <div class="dev-tag amb" style="color:var(--amb)">AI Integration</div>
+      <div class="dev-title">Inteligencia Artificial — Claude & GPT-4</div>
+      <div class="dev-desc">Integración de modelos de IA en aplicaciones reales: chatbots conversacionales, análisis de riesgos por visión computacional, evaluación automática de texto y generación de informes ejecutivos. Proyectos desplegados en producción con Anthropic y OpenAI.</div>
+      <div class="dev-badges"><span class="dbadge">Claude 3.5</span><span class="dbadge">GPT-4</span><span class="dbadge">Anthropic SDK</span><span class="dbadge">Prompting</span><span class="dbadge">API REST</span></div>
+    </div>
+
+    <div class="dev-card em reveal">
+      <div class="dev-icon em">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="dev-tag em">Operational Control</div>
+      <div class="dev-title">DPO Platform — Control Digital</div>
+      <div class="dev-desc">Dominio de la plataforma DPO para control operativo avanzado. Gestión de auditorías, eficiencia de combustible, seguimiento de indicadores y reportes ejecutivos integrados.</div>
+      <div class="dev-badges"><span class="dbadge">DPO</span><span class="dbadge">Auditorías</span><span class="dbadge">KPI Flota</span><span class="dbadge">Combustible</span></div>
+    </div>
+
+    <div class="dev-card pur reveal">
+      <div class="dev-icon pur">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+      </div>
+      <div class="dev-tag pur">Data Visualization</div>
+      <div class="dev-title">Google Workspace — Integración</div>
+      <div class="dev-desc">Integración completa del ecosistema Google: Sheets avanzado, Forms, Slides, Docs y Drive. Creación de dashboards dinámicos, reportes automáticos y flujos de aprobación digitales.</div>
+      <div class="dev-badges"><span class="dbadge">Sheets</span><span class="dbadge">Forms</span><span class="dbadge">Drive</span><span class="dbadge">Slides</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── EXPERIENCIA ──────────────────────────────────────── -->
+<section class="sec" id="experiencia">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Trayectoria</div>
+    <h2 class="sec-title">Experiencia Laboral</h2>
+    <p class="sec-sub">14 años construyendo soluciones operativas y tecnológicas en el sector logístico y automotor colombiano.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-card" style="border-color:rgba(56,189,248,.22);background:linear-gradient(135deg,rgba(56,189,248,.035) 0%,var(--bg2) 60%)">
+        <div class="tl-meta">
+          <span class="tl-period" style="background:rgba(52,211,153,.09);border-color:rgba(52,211,153,.2);color:var(--em)">2021 – Actualidad</span>
+          <span class="tl-co">Integral Service M&amp;H · Freelance</span>
+        </div>
+        <div class="tl-role">Consultor en Datos, Automatización y Desarrollo Digital</div>
+        <p class="tl-desc">Consultoría independiente en analítica de datos, Power BI, AppSheet y desarrollo de software. Diseño y entrega de dashboards, apps y herramientas digitales para clientes del sector logístico y operativo. Desarrollo de proyectos web y mobile con React, Next.js, Node.js, Python y Flutter. Integración de inteligencia artificial (Claude, GPT-4) en aplicaciones de producción.</p>
+        <div class="pills" style="margin-top:.85rem">
+          <span class="pill">Power BI</span><span class="pill em">React / Next.js</span><span class="pill em">Python</span><span class="pill pur">Flutter</span><span class="pill">AppSheet</span><span class="pill em">Claude AI</span>
         </div>
       </div>
+    </div>
 
-      <div class="tl-item reveal d2">
-        <div class="tl-card">
-          <div class="tl-meta">
-            <span class="tl-period">Jul 2010 – Dic 2017</span>
-            <span class="tl-co">Country Center S.A.S.</span>
-          </div>
-          <div class="tl-role">Asesor de Servicio y Gestor de Seguros</div>
-          <p class="tl-desc">Gestión administrativa y operativa en casos de siniestros relacionados con pólizas de seguros. Responsable del proceso de calidad de servicios a usuarios finales, valoraciones de daños y manejo de informes técnicos especializados.</p>
-          <div class="pills" style="margin-top:.9rem">
-            <span class="pill">Gestión de Siniestros</span><span class="pill">Control de Calidad</span><span class="pill">Informes Técnicos</span><span class="pill">Pólizas</span>
-          </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-period">Ago 2018 – Jul 2021</span>
+          <span class="tl-co">Soluciones Logísticas Avanzadas SAS</span>
+        </div>
+        <div class="tl-role">Coordinador de Flota</div>
+        <p class="tl-desc">Lideré el manejo administrativo y operativo de la flota vehicular completa. Implementé automatización de procesos mediante apps, desarrollé informes KPI y gestioné el control documental de vehículos y conductores. Obtuve las mejores calificaciones en auditorías DPO con foco en eficiencia de combustible y mejora continua.</p>
+        <div class="pills" style="margin-top:.85rem">
+          <span class="pill">KPI</span><span class="pill">DPO</span><span class="pill">AppSheet</span><span class="pill">Auditorías</span><span class="pill">Control Documental</span><span class="pill em">Power BI</span>
         </div>
       </div>
+    </div>
 
-      <div class="tl-item reveal d3">
-        <div class="tl-card">
-          <div class="tl-meta">
-            <span class="tl-period">Ago 2009 – Feb 2010</span>
-            <span class="tl-co">Tayrona Automotriz</span>
-          </div>
-          <div class="tl-role">Jefe del Área de Colisiones</div>
-          <p class="tl-desc">Gestión de procesos para la atención y ejecución de reparaciones de vehículos siniestrados y particulares en latonería y pintura. Manejo de plataformas web de aseguradoras y formatos de autorización.</p>
-          <div class="pills" style="margin-top:.9rem">
-            <span class="pill">Latonería</span><span class="pill">Seguros</span><span class="pill">Plataformas Web</span><span class="pill">Gestión Procesos</span>
-          </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-period">Jul 2010 – Dic 2017</span>
+          <span class="tl-co">Country Center S.A.S.</span>
+        </div>
+        <div class="tl-role">Asesor de Servicio y Gestor de Seguros</div>
+        <p class="tl-desc">Gestión administrativa y operativa de siniestros en pólizas de seguros. Responsable del proceso de calidad de servicios a usuarios finales, valoraciones de daños, coordinación con aseguradoras y manejo de informes técnicos especializados.</p>
+        <div class="pills" style="margin-top:.85rem">
+          <span class="pill">Siniestros</span><span class="pill">Control de Calidad</span><span class="pill">Informes Técnicos</span><span class="pill">Pólizas</span>
         </div>
       </div>
+    </div>
 
-      <div class="tl-item reveal d4">
-        <div class="tl-card">
-          <div class="tl-meta">
-            <span class="tl-period">Jul 2005 – Ene 2007</span>
-            <span class="tl-co">Inversiones Rincón Díaz</span>
-          </div>
-          <div class="tl-role">Auxiliar de Bodega</div>
-          <p class="tl-desc">Recibo y despacho de mercancía. Inventario y control de perecederos. Manejo del área de devoluciones y administración de software de inventario.</p>
-          <div class="pills" style="margin-top:.9rem">
-            <span class="pill">Inventario</span><span class="pill">Logística</span><span class="pill">Software</span>
-          </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-period">Ago 2009 – Feb 2010</span>
+          <span class="tl-co">Tayrona Automotriz</span>
+        </div>
+        <div class="tl-role">Jefe del Área de Colisiones</div>
+        <p class="tl-desc">Gestión de procesos para atención y ejecución de reparaciones en latonería y pintura de vehículos siniestrados y particulares. Manejo de plataformas web de aseguradoras y formatos de autorización.</p>
+        <div class="pills" style="margin-top:.85rem">
+          <span class="pill">Latonería</span><span class="pill">Seguros</span><span class="pill">Plataformas Web</span><span class="pill">Gestión de Procesos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-period">Jul 2005 – Ene 2007</span>
+          <span class="tl-co">Inversiones Rincón Díaz</span>
+        </div>
+        <div class="tl-role">Auxiliar de Bodega</div>
+        <p class="tl-desc">Recibo y despacho de mercancía. Inventario y control de perecederos. Manejo del área de devoluciones y administración de software de inventario.</p>
+        <div class="pills" style="margin-top:.85rem">
+          <span class="pill">Inventario</span><span class="pill">Logística</span><span class="pill">Software</span>
         </div>
       </div>
     </div>
   </div>
+</div>
 </section>
 
 <div class="divider"></div>
 
-<!-- EDUCACIÓN -->
-<section id="educacion">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Formación</div>
-      <h2 class="sec-title">Educación & Certificaciones</h2>
+<!-- ─── EDUCACIÓN ────────────────────────────────────────── -->
+<section class="sec" id="educacion">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Formación</div>
+    <h2 class="sec-title">Educación & Certificaciones</h2>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-yr">En Curso · 2024–2026</div>
+      <div class="edu-title">Especialista en Power BI y Analista de Datos</div>
+      <div class="edu-inst">Formación especializada · Modalidad virtual</div>
+      <div class="edu-badge eb-a">
+        <div class="dot-pulse" style="background:var(--amb);width:5px;height:5px"></div>
+        En progreso
+      </div>
     </div>
 
-    <div class="edu-grid">
-      <div class="edu-card reveal d1">
-        <div class="edu-yr">En Curso · 2024–2025</div>
-        <div class="edu-title">Especialista en Power BI y Analista de Datos</div>
-        <div class="edu-inst">Formación especializada · Modalidad virtual</div>
-        <div class="badge g"><div style="width:5px;height:5px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite"></div>En progreso</div>
-      </div>
+    <div class="edu-card reveal">
+      <div class="edu-yr">2005</div>
+      <div class="edu-title">Técnico en el Manejo en el Área de Compras</div>
+      <div class="edu-inst">Formación técnica laboral por competencias</div>
+      <div class="edu-badge eb-t">Certificado</div>
+    </div>
 
-      <div class="edu-card reveal d2">
-        <div class="edu-yr">2015</div>
-        <div class="edu-title">Evaluación de Control y Gestión Electrónica de Motor — Diesel CRDI</div>
-        <div class="edu-inst">Técnico certificado · Sector automotor</div>
-        <div class="badge t">Certificado</div>
-      </div>
+    <div class="edu-card reveal">
+      <div class="edu-yr">2015</div>
+      <div class="edu-title">Evaluación de Control y Gestión Electrónica de Motor — Diesel CRDI</div>
+      <div class="edu-inst">Técnico certificado · Sector automotor</div>
+      <div class="edu-badge eb-t">Certificado</div>
+    </div>
 
-      <div class="edu-card reveal d3">
-        <div class="edu-yr">2015</div>
-        <div class="edu-title">Evaluación de Control y Gestión Eléctrica — Gasolina, Gas y Diesel</div>
-        <div class="edu-inst">Técnico certificado · Sector automotor</div>
-        <div class="badge t">Certificado</div>
-      </div>
+    <div class="edu-card reveal">
+      <div class="edu-yr">2015</div>
+      <div class="edu-title">Evaluación de Control y Gestión Eléctrica — Gasolina, Gas y Diesel</div>
+      <div class="edu-inst">Técnico certificado · Sector automotor</div>
+      <div class="edu-badge eb-t">Certificado</div>
+    </div>
 
-      <div class="edu-card reveal d4">
-        <div class="edu-yr">2005</div>
-        <div class="edu-title">Técnico en el Manejo en el Área de Compras</div>
-        <div class="edu-inst">Formación técnica laboral por competencias</div>
-        <div class="badge t">Certificado</div>
-      </div>
-
-      <div class="edu-card reveal d5">
-        <div class="edu-yr">2004</div>
-        <div class="edu-title">Bachillerato Académico</div>
-        <div class="edu-inst">Instituto Francisco de Paula Santander · Santa Marta</div>
-        <div class="badge t">Graduado</div>
-      </div>
+    <div class="edu-card reveal">
+      <div class="edu-yr">2004</div>
+      <div class="edu-title">Bachillerato Académico</div>
+      <div class="edu-inst">Instituto Francisco de Paula Santander · Santa Marta</div>
+      <div class="edu-badge eb-g">Graduado</div>
     </div>
   </div>
+</div>
 </section>
 
 <div class="divider"></div>
 
-<!-- PORTAFOLIO -->
-<section id="portafolio">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Power BI · AppSheet · Analítica</div>
-      <h2 class="sec-title">Portafolio de Proyectos</h2>
-      <p class="sec-sub">18 visualizaciones y apps entregadas en producción para Bavaria — Cúcuta, organizadas por pilar estratégico.</p>
-    </div>
-
-    <!-- REPARTO -->
-    <div style="margin-top:3.5rem">
-      <div class="pillar-hd reveal">
-        <div class="pillar-badge pb-t">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/></svg>
-          Pilar: Reparto
-        </div>
-        <div class="pillar-line"></div>
-      </div>
-      <div class="proj-grid">
-        <a href="https://tinyurl.com/45c2dekr" target="_blank" rel="noopener" class="proj-card reveal d1">
-          <div class="proj-num">Power BI · #01</div>
-          <div class="proj-type pt-t">Dashboard</div>
-          <div class="proj-title">Tiempo Matutino</div>
-          <div class="proj-desc">Análisis de tiempos matutinos integrado en una sola visual consolidada con KPIs de eficiencia de reparto.</div>
-          <div class="proj-link">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/45c2dekr" target="_blank" rel="noopener" class="proj-card reveal d2">
-          <div class="proj-num">Power BI · #02</div>
-          <div class="proj-type pt-t">Dashboard</div>
-          <div class="proj-title">Tiempo Vespertino</div>
-          <div class="proj-desc">Análisis de tiempos vespertinos integrado en una sola visual con seguimiento de rutas de tarde.</div>
-          <div class="proj-link">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/45c2dekr" target="_blank" rel="noopener" class="proj-card reveal d3">
-          <div class="proj-num">Power BI · #03</div>
-          <div class="proj-type pt-t">Dashboard</div>
-          <div class="proj-title">Tiempo en Ruta</div>
-          <div class="proj-desc">Análisis completo del tiempo en ruta con métricas de eficiencia y cumplimiento de ventanas horarias.</div>
-          <div class="proj-link">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/8m87wbhn" target="_blank" rel="noopener" class="proj-card reveal d1">
-          <div class="proj-num">Power BI · #04</div>
-          <div class="proj-type pt-t">Dashboard</div>
-          <div class="proj-title">DQI — Data Quality Index</div>
-          <div class="proj-desc">Análisis del índice de calidad de datos para medición y control de integridad en operaciones logísticas.</div>
-          <div class="proj-link">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/3bp6ev47" target="_blank" rel="noopener" class="proj-card reveal d2">
-          <div class="proj-num">Power BI · #05</div>
-          <div class="proj-type pt-t">Dashboard</div>
-          <div class="proj-title">Rechazo</div>
-          <div class="proj-desc">Visualización de rechazos por tipo y origen con análisis de tendencias para reducción de devoluciones.</div>
-          <div class="proj-link">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/mr26vwy3" target="_blank" rel="noopener" class="proj-card reveal d3">
-          <div class="proj-num">Power BI · #06</div>
-          <div class="proj-type pt-t">Dashboard</div>
-          <div class="proj-title">OTIF</div>
-          <div class="proj-desc">Análisis OTIF completo: On Time, No Plan, Rechazo, In Full y RTM — métricas clave de cumplimiento logístico.</div>
-          <div class="proj-link">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-      </div>
-    </div>
-
-    <!-- PEOPLE -->
-    <div style="margin-top:3rem">
-      <div class="pillar-hd reveal">
-        <div class="pillar-badge pb-g">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          Pilar: People
-        </div>
-        <div class="pillar-line"></div>
-      </div>
-      <div class="proj-grid">
-        <a href="https://tinyurl.com/tb9948nz" target="_blank" rel="noopener" class="proj-card g reveal d1">
-          <div class="proj-num">Power BI · #07</div>
-          <div class="proj-type pt-g">Dashboard</div>
-          <div class="proj-title">Buzón de Sugerencias</div>
-          <div class="proj-desc">Visualización interactiva del buzón de sugerencias con análisis de categorías y tendencias de feedback.</div>
-          <div class="proj-link g">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/4uk3mutz" target="_blank" rel="noopener" class="proj-card g reveal d2">
-          <div class="proj-num">Power BI · #08</div>
-          <div class="proj-type pt-g">Dashboard</div>
-          <div class="proj-title">Engagement</div>
-          <div class="proj-desc">Visualización del nivel de engagement del equipo con métricas de satisfacción y compromiso organizacional.</div>
-          <div class="proj-link g">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/4zs4b9k4" target="_blank" rel="noopener" class="proj-card g reveal d3">
-          <div class="proj-num">Power BI · #09</div>
-          <div class="proj-type pt-g">Dashboard</div>
-          <div class="proj-title">Servicios Generales</div>
-          <div class="proj-desc">Control de servicios generales con seguimiento de solicitudes, tiempos de atención y estado de resolución.</div>
-          <div class="proj-link g">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/3m5ub6wp" target="_blank" rel="noopener" class="proj-card g reveal d1">
-          <div class="proj-num">Power BI · #10</div>
-          <div class="proj-type pt-g">Dashboard</div>
-          <div class="proj-title">Entrevista de Salida</div>
-          <div class="proj-desc">Análisis de entrevistas de salida para identificar patrones de rotación y áreas de mejora organizacional.</div>
-          <div class="proj-link g">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/569awmmr" target="_blank" rel="noopener" class="proj-card g reveal d2">
-          <div class="proj-num">Power BI · #11</div>
-          <div class="proj-type pt-g">Dashboard</div>
-          <div class="proj-title">Caminata Gemba</div>
-          <div class="proj-desc">Seguimiento de hallazgos Gemba con acciones correctivas, responsables y estado de implementación.</div>
-          <div class="proj-link g">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/4x6vm7h2" target="_blank" rel="noopener" class="proj-card g reveal d3">
-          <div class="proj-num">Power BI · #12</div>
-          <div class="proj-type pt-g">Dashboard</div>
-          <div class="proj-title">Capacitaciones</div>
-          <div class="proj-desc">Análisis de capacitaciones con participación, cobertura, temas impartidos y evaluaciones del personal.</div>
-          <div class="proj-link g">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-      </div>
-    </div>
-
-    <!-- SAFETY -->
-    <div style="margin-top:3rem">
-      <div class="pillar-hd reveal">
-        <div class="pillar-badge pb-p">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Pilar: Safety
-        </div>
-        <div class="pillar-line"></div>
-      </div>
-      <div class="proj-grid">
-        <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="proj-card p reveal d1">
-          <div class="proj-num">AppSheet · #13</div>
-          <div class="proj-type pt-p">App</div>
-          <div class="proj-title">Control Licencias — Reparto</div>
-          <div class="proj-desc">App con registro de licencias, alertas automáticas de vencimiento e informe nativo integrado para conductores.</div>
-          <div class="proj-link p">Ver Aplicación <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="proj-card p reveal d2">
-          <div class="proj-num">AppSheet · #14</div>
-          <div class="proj-type pt-p">App</div>
-          <div class="proj-title">Control Licencias — Almacén</div>
-          <div class="proj-desc">App con registros, alertas de vencimiento e informe nativo para el área de almacén con trazabilidad completa.</div>
-          <div class="proj-link p">Ver Aplicación <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="proj-card p reveal d3">
-          <div class="proj-num">AppSheet · #15</div>
-          <div class="proj-type pt-p">App</div>
-          <div class="proj-title">Control Exámenes Médicos</div>
-          <div class="proj-desc">App con registros, alertas automáticas de vencimiento e informe nativo para aptitudes médicas del personal.</div>
-          <div class="proj-link p">Ver Aplicación <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="proj-card p reveal d1">
-          <div class="proj-num">AppSheet · #16</div>
-          <div class="proj-type pt-p">App</div>
-          <div class="proj-title">Control Herramientas — Estibadores</div>
-          <div class="proj-desc">App con registros y seguimiento de herramientas manuales de estibadores con trazabilidad por operario.</div>
-          <div class="proj-link p">Ver Aplicación <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="proj-card p reveal d2">
-          <div class="proj-num">AppSheet · #17</div>
-          <div class="proj-type pt-p">App</div>
-          <div class="proj-title">Control Herramientas — Carretillas</div>
-          <div class="proj-desc">App con registros y seguimiento de carretillas/zorras manuales de reparto con vinculación de formularios.</div>
-          <div class="proj-link p">Ver Aplicación <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-        <a href="https://tinyurl.com/ajy48nec" target="_blank" rel="noopener" class="proj-card p reveal d3">
-          <div class="proj-num">Power BI · #18</div>
-          <div class="proj-type pt-p">Dashboard</div>
-          <div class="proj-title">Cashless</div>
-          <div class="proj-desc">Análisis Cashless con visualización de transacciones digitales, control de pagos y trazabilidad financiera.</div>
-          <div class="proj-link p">Ver Dashboard <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
-        </a>
-      </div>
-    </div>
+<!-- ─── PORTAFOLIO ───────────────────────────────────────── -->
+<section class="sec" id="portafolio">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Power BI · AppSheet · Analítica</div>
+    <h2 class="sec-title">Portafolio de Proyectos</h2>
+    <p class="sec-sub">18 visualizaciones y aplicaciones entregadas en producción para Bavaria — Cúcuta, organizadas por pilar estratégico.</p>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- REFERENCIAS -->
-<section id="referencias">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Aval</div>
-      <h2 class="sec-title">Referencias Personales</h2>
-    </div>
-    <div class="refs-grid">
-      <div class="ref-card reveal d1">
-        <div class="ref-av" style="background:linear-gradient(135deg,var(--teal),var(--emerald))">AO</div>
-        <div class="ref-name">Andrea Carolina Ovalle</div>
-        <div class="ref-role">Ingeniera Civil</div>
-        <div class="ref-phone">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          300-765-8319
-        </div>
+  <!-- REPARTO -->
+  <div style="margin-top:3rem">
+    <div class="pillar-hd reveal">
+      <div class="pillar-badge pb-sky">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/></svg>
+        Reparto
       </div>
-      <div class="ref-card reveal d2">
-        <div class="ref-av" style="background:linear-gradient(135deg,var(--emerald),#0096C7)">LM</div>
-        <div class="ref-name">Lucrecia Monsalve Rojas</div>
-        <div class="ref-role">Secretaria</div>
-        <div class="ref-phone">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          300-425-9025
-        </div>
-      </div>
+      <div class="pline"></div>
+      <span style="font-size:.68rem;color:var(--muted);white-space:nowrap">6 entregables</span>
     </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- CONTACTO -->
-<section id="contacto">
-  <div class="container">
-    <div class="reveal" style="text-align:center">
-      <div class="eyebrow" style="margin:0 auto 1.1rem">Contacto</div>
-      <h2 class="sec-title" style="max-width:580px;margin:0 auto .9rem">¿Listo para trabajar juntos?</h2>
-      <p class="sec-sub" style="margin:0 auto">Disponible para oportunidades en análisis de datos, gestión logística y automatización de procesos.</p>
-    </div>
-
-    <div class="contact-grid">
-      <a href="tel:3247146958" class="contact-card reveal d1">
-        <div class="contact-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
-        <div class="contact-lb">Teléfono</div>
-        <div class="contact-vl">324 714 6958</div>
+    <div class="pj-grid">
+      <a href="https://tinyurl.com/45c2dekr" target="_blank" rel="noopener" class="pj-card reveal">
+        <div class="pj-num">Power BI · #01</div>
+        <div class="pj-type pt-sky">Dashboard</div>
+        <div class="pj-title">Tiempo Matutino</div>
+        <div class="pj-desc">Análisis integrado de tiempos de reparto matutino con KPIs de eficiencia y cumplimiento de ruta.</div>
+        <div class="pj-link">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
       </a>
-      <a href="mailto:odinprojecapp@gmail.com" class="contact-card reveal d2">
-        <div class="contact-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <div class="contact-lb">Email</div>
-        <div class="contact-vl">odinprojecapp@gmail.com</div>
+      <a href="https://tinyurl.com/45c2dekr" target="_blank" rel="noopener" class="pj-card reveal">
+        <div class="pj-num">Power BI · #02</div>
+        <div class="pj-type pt-sky">Dashboard</div>
+        <div class="pj-title">Tiempo Vespertino</div>
+        <div class="pj-desc">Análisis de tiempos vespertinos integrado en una sola visual con seguimiento de rutas de tarde.</div>
+        <div class="pj-link">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
       </a>
-      <div class="contact-card reveal d3">
-        <div class="contact-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div class="contact-lb">Ubicación</div>
-        <div class="contact-vl">Santa Marta, Magdalena</div>
-      </div>
-      <div class="contact-card reveal d4">
-        <div class="contact-ic" style="background:rgba(6,214,160,.09);border-color:rgba(6,214,160,.14);color:var(--emerald)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
-        <div class="contact-lb">Disponibilidad</div>
-        <div class="contact-vl" style="color:var(--emerald)">Disponible inmediatamente</div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:3rem" class="reveal">
-      <a href="Hoja de David Jose Monsalve Guzman.pdf" download class="btn-p" style="display:inline-flex">
-        Descargar Hoja de Vida
-        <span class="btn-icon">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        </span>
+      <a href="https://tinyurl.com/45c2dekr" target="_blank" rel="noopener" class="pj-card reveal">
+        <div class="pj-num">Power BI · #03</div>
+        <div class="pj-type pt-sky">Dashboard</div>
+        <div class="pj-title">Tiempo en Ruta</div>
+        <div class="pj-desc">Análisis completo del tiempo en ruta con métricas de eficiencia y ventanas horarias de entrega.</div>
+        <div class="pj-link">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/8m87wbhn" target="_blank" rel="noopener" class="pj-card reveal">
+        <div class="pj-num">Power BI · #04</div>
+        <div class="pj-type pt-sky">Dashboard</div>
+        <div class="pj-title">DQI — Data Quality Index</div>
+        <div class="pj-desc">Índice de calidad de datos para control de integridad y consistencia en operaciones logísticas.</div>
+        <div class="pj-link">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/3bp6ev47" target="_blank" rel="noopener" class="pj-card reveal">
+        <div class="pj-num">Power BI · #05</div>
+        <div class="pj-type pt-sky">Dashboard</div>
+        <div class="pj-title">Rechazo</div>
+        <div class="pj-desc">Visualización de rechazos por tipo y origen con análisis de tendencias para reducción de devoluciones.</div>
+        <div class="pj-link">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/mr26vwy3" target="_blank" rel="noopener" class="pj-card reveal">
+        <div class="pj-num">Power BI · #06</div>
+        <div class="pj-type pt-sky">Dashboard</div>
+        <div class="pj-title">OTIF</div>
+        <div class="pj-desc">Análisis OTIF completo: On Time, No Plan, Rechazo, In Full y RTM. Métricas clave de cumplimiento.</div>
+        <div class="pj-link">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
       </a>
     </div>
   </div>
+
+  <!-- PEOPLE -->
+  <div>
+    <div class="pillar-hd reveal">
+      <div class="pillar-badge pb-em">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        People
+      </div>
+      <div class="pline"></div>
+      <span style="font-size:.68rem;color:var(--muted);white-space:nowrap">6 entregables</span>
+    </div>
+    <div class="pj-grid">
+      <a href="https://tinyurl.com/tb9948nz" target="_blank" rel="noopener" class="pj-card em reveal">
+        <div class="pj-num">Power BI · #07</div>
+        <div class="pj-type pt-em">Dashboard</div>
+        <div class="pj-title">Buzón de Sugerencias</div>
+        <div class="pj-desc">Análisis interactivo del buzón de sugerencias por categorías y tendencias de feedback del equipo.</div>
+        <div class="pj-link em">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/4uk3mutz" target="_blank" rel="noopener" class="pj-card em reveal">
+        <div class="pj-num">Power BI · #08</div>
+        <div class="pj-type pt-em">Dashboard</div>
+        <div class="pj-title">Engagement</div>
+        <div class="pj-desc">Nivel de engagement del equipo con métricas de satisfacción y compromiso organizacional.</div>
+        <div class="pj-link em">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/4zs4b9k4" target="_blank" rel="noopener" class="pj-card em reveal">
+        <div class="pj-num">Power BI · #09</div>
+        <div class="pj-type pt-em">Dashboard</div>
+        <div class="pj-title">Servicios Generales</div>
+        <div class="pj-desc">Control de servicios con seguimiento de solicitudes, tiempos de atención y estado de resolución.</div>
+        <div class="pj-link em">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/3m5ub6wp" target="_blank" rel="noopener" class="pj-card em reveal">
+        <div class="pj-num">Power BI · #10</div>
+        <div class="pj-type pt-em">Dashboard</div>
+        <div class="pj-title">Entrevista de Salida</div>
+        <div class="pj-desc">Análisis de entrevistas de salida para identificar patrones de rotación y áreas de mejora.</div>
+        <div class="pj-link em">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/569awmmr" target="_blank" rel="noopener" class="pj-card em reveal">
+        <div class="pj-num">Power BI · #11</div>
+        <div class="pj-type pt-em">Dashboard</div>
+        <div class="pj-title">Caminata Gemba</div>
+        <div class="pj-desc">Seguimiento de hallazgos Gemba con acciones correctivas, responsables y estado de implementación.</div>
+        <div class="pj-link em">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/4x6vm7h2" target="_blank" rel="noopener" class="pj-card em reveal">
+        <div class="pj-num">Power BI · #12</div>
+        <div class="pj-type pt-em">Dashboard</div>
+        <div class="pj-title">Capacitaciones</div>
+        <div class="pj-desc">Análisis de capacitaciones: participación, cobertura, temas impartidos y evaluación del personal.</div>
+        <div class="pj-link em">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DESARROLLO WEB & APPS -->
+  <div>
+    <div class="pillar-hd reveal">
+      <div class="pillar-badge" style="background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);color:var(--amb)">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+        Desarrollo Web & Apps
+      </div>
+      <div class="pline"></div>
+      <span style="font-size:.68rem;color:var(--muted);white-space:nowrap">9 proyectos</span>
+    </div>
+    <div class="pj-grid">
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(167,139,250,.18)">
+        <div class="pj-num">React · Next.js · GPT-4 · #W01</div>
+        <div class="pj-type" style="background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.13);color:var(--pur)">Plataforma IA</div>
+        <div class="pj-title">RootMind — Análisis de Causa Raíz</div>
+        <div class="pj-desc">Plataforma web con IA (GPT-4) para análisis de 5 Porqués con Taxonomía de Bloom. Ranking de colaboradores, dashboards en tiempo real, notificaciones WebSocket y gestión de licencias por gerencia. Deploy en Vercel + Supabase.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">React</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">Node.js</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">GPT-4</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">Supabase</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">Vercel</span>
+        </div>
+        <div class="pj-link pur" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(56,189,248,.18)">
+        <div class="pj-num">React · Claude AI · PWA · #W02</div>
+        <div class="pj-type pt-sky">PWA / IA</div>
+        <div class="pj-title">SafePoint AI — Riesgos SST</div>
+        <div class="pj-desc">App web progresiva (PWA) para análisis de riesgos de seguridad y salud en el trabajo. Integra Claude 3.5 Sonnet (Anthropic) para visión computacional, validación GPS de 100m, captura fotográfica, generación de PDF e informes con mapa interactivo.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">React + Vite</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">Claude 3.5</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">Firestore</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">Google Maps</span>
+        </div>
+        <div class="pj-link" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(52,211,153,.18)">
+        <div class="pj-num">Next.js 16 · Supabase · #W03</div>
+        <div class="pj-type pt-em">LMS Corporativo</div>
+        <div class="pj-title">App People — Gestión de Capacitaciones</div>
+        <div class="pj-desc">LMS corporativo para capacitación y evaluación de colaboradores. Módulos de colaboradores, cursos, evaluaciones, cronograma, asignaciones, aula virtual y cumplimiento. Roles y control de acceso granular. Stack moderno con Next.js 16 + Supabase + Vercel.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Next.js 16</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">TypeScript</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Supabase</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">TailwindCSS</span>
+        </div>
+        <div class="pj-link em" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(167,139,248,.18)">
+        <div class="pj-num">NestJS · Flutter · Socket.IO · #W04</div>
+        <div class="pj-type pur" style="background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.13);color:var(--pur)">App Móvil</div>
+        <div class="pj-title">OPS Team — Gestión Paintball Milsim</div>
+        <div class="pj-desc">App multiplataforma (Android/iOS) para gestión de equipos milsim. Sistema de XP y rangos, misiones con roles, chat en tiempo real (WebSocket), marketplace de equipamiento, gamificación y panel admin. Backend NestJS + Frontend Flutter.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">Flutter</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">NestJS</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">Socket.IO</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">Supabase</span>
+        </div>
+        <div class="pj-link pur" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(56,189,248,.18)">
+        <div class="pj-num">Node.js · Claude 3.5 · SharePoint · #W05</div>
+        <div class="pj-type pt-sky">Chatbot IA</div>
+        <div class="pj-title">PadrinoBot — Onboarding con IA</div>
+        <div class="pj-desc">Chatbot conversacional para onboarding humanizado de nuevos empleados. Metodología 5C's, análisis automático de respuestas con Claude 3.5, scores por objetivo, detección de riesgos, informes automáticos para managers y almacenamiento en SharePoint vía Microsoft Graph API.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">Node.js</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">Claude 3.5</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">SharePoint</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">Vercel</span>
+        </div>
+        <div class="pj-link" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="https://chatbot-serena-833hmgs9h-david-monsalves-projects-b2790dc3.vercel.app" target="_blank" rel="noopener" class="pj-card reveal" style="border-color:rgba(52,211,153,.18)">
+        <div class="pj-num">Python · Claude Haiku · Vercel · #W06</div>
+        <div class="pj-type pt-em">Chatbot IA · En Producción</div>
+        <div class="pj-title">Serena — Bienestar Laboral con IA</div>
+        <div class="pj-desc">Chatbot desplegado en producción (Vercel) que actúa como psicóloga laboral virtual. Evaluación del estado emocional y nivel de estrés mediante conversación natural. Impulsado por Claude 3.5 Haiku (Anthropic) con base de datos PostgreSQL en Supabase.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Python Flask</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Claude Haiku</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Supabase</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Vercel</span>
+        </div>
+        <div class="pj-link em" style="margin-top:.7rem">Ver en Producción <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(251,191,36,.18)">
+        <div class="pj-num">Python · ETL · Supabase · #W07</div>
+        <div class="pj-type" style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.13);color:var(--amb)">ETL / Data</div>
+        <div class="pj-title">KPI Operativos — Sistema ETL</div>
+        <div class="pj-desc">Sistema completo de ETL en Python para procesar indicadores operativos. Extrae, transforma y carga datos desde Excel hacia estructura lista para análisis estratégico. Incluye validaciones avanzadas, logging completo, dashboard web y propuesta comercial.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Python</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">ETL</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Pandas</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Supabase</span>
+        </div>
+        <div class="pj-link" style="color:var(--amb);margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(167,139,250,.18)">
+        <div class="pj-num">Phaser.js · HTML5 · #W08</div>
+        <div class="pj-type pur" style="background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.13);color:var(--pur)">Videojuego</div>
+        <div class="pj-title">Piloto Videojuego — Capacitación Seguridad</div>
+        <div class="pj-desc">Juego 2D educativo interactivo desarrollado con Phaser.js 3.60 para capacitación en seguridad industrial. Diseño minimalista, colores corporativos, sprites personalizados, múltiples niveles y mecánicas gamificadas para el aprendizaje de protocolos SST.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">Phaser.js</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">JavaScript ES6</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">HTML5</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">CSS3</span>
+        </div>
+        <div class="pj-link pur" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(56,189,248,.18)">
+        <div class="pj-num">HTML · CSS · JavaScript · #W09</div>
+        <div class="pj-type pt-sky">Herramienta Web</div>
+        <div class="pj-title">Generador de QR Dinámicos</div>
+        <div class="pj-desc">Aplicación web para generación de códigos QR dinámicos. Interfaz limpia y responsive construida con HTML5, CSS3 y JavaScript vanilla. Permite crear, personalizar y descargar QR codes para uso operativo y logístico.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">HTML5</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">CSS3</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">JavaScript</span>
+        </div>
+        <div class="pj-link" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- SAFETY -->
+  <div>
+    <div class="pillar-hd reveal">
+      <div class="pillar-badge pb-pur">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Safety
+      </div>
+      <div class="pline"></div>
+      <span style="font-size:.68rem;color:var(--muted);white-space:nowrap">6 entregables</span>
+    </div>
+    <div class="pj-grid">
+      <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="pj-card pur reveal">
+        <div class="pj-num">AppSheet · #13</div>
+        <div class="pj-type pt-pur">Aplicación</div>
+        <div class="pj-title">Control Licencias — Reparto</div>
+        <div class="pj-desc">App con registro de licencias, alertas automáticas de vencimiento e informe nativo para conductores.</div>
+        <div class="pj-link pur">Ver App <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="pj-card pur reveal">
+        <div class="pj-num">AppSheet · #14</div>
+        <div class="pj-type pt-pur">Aplicación</div>
+        <div class="pj-title">Control Licencias — Almacén</div>
+        <div class="pj-desc">App con registros, alertas de vencimiento e informe nativo para el área de almacén con trazabilidad.</div>
+        <div class="pj-link pur">Ver App <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="pj-card pur reveal">
+        <div class="pj-num">AppSheet · #15</div>
+        <div class="pj-type pt-pur">Aplicación</div>
+        <div class="pj-title">Control Exámenes Médicos</div>
+        <div class="pj-desc">Alertas automáticas de vencimiento e informe nativo para aptitudes médicas del personal operativo.</div>
+        <div class="pj-link pur">Ver App <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="pj-card pur reveal">
+        <div class="pj-num">AppSheet · #16</div>
+        <div class="pj-type pt-pur">Aplicación</div>
+        <div class="pj-title">Control Herramientas — Estibadores</div>
+        <div class="pj-desc">Registro y seguimiento de herramientas manuales de estibadores con trazabilidad por operario.</div>
+        <div class="pj-link pur">Ver App <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/yc7dnwkd" target="_blank" rel="noopener" class="pj-card pur reveal">
+        <div class="pj-num">AppSheet · #17</div>
+        <div class="pj-type pt-pur">Aplicación</div>
+        <div class="pj-title">Control Herramientas — Carretillas</div>
+        <div class="pj-desc">Registro y seguimiento de carretillas y zorras manuales de reparto con formularios vinculados.</div>
+        <div class="pj-link pur">Ver App <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://tinyurl.com/ajy48nec" target="_blank" rel="noopener" class="pj-card pur reveal">
+        <div class="pj-num">Power BI · #18</div>
+        <div class="pj-type pt-pur">Dashboard</div>
+        <div class="pj-title">Cashless</div>
+        <div class="pj-desc">Análisis Cashless con visualización de transacciones digitales, control de pagos y trazabilidad.</div>
+        <div class="pj-link pur">Ver Dashboard <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+    </div>
+  </div>
+</div>
 </section>
 
+<div class="divider"></div>
+
+<!-- ─── REFERENCIAS ───────────────────────────────────────── -->
+<section class="sec" id="referencias">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Aval</div>
+    <h2 class="sec-title">Referencias Personales</h2>
+  </div>
+  <div class="ref-grid">
+    <div class="ref-card reveal">
+      <div class="ref-av" style="background:linear-gradient(135deg,var(--sky),var(--em))">AO</div>
+      <div class="ref-name">Andrea Carolina Ovalle</div>
+      <div class="ref-occ">Ingeniera Civil</div>
+      <div class="ref-phone">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.99.36 1.95.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6z"/></svg>
+        300-765-8319
+      </div>
+    </div>
+    <div class="ref-card reveal">
+      <div class="ref-av" style="background:linear-gradient(135deg,var(--em),#0ea5e9)">LM</div>
+      <div class="ref-name">Lucrecia Monsalve Rojas</div>
+      <div class="ref-occ">Secretaria</div>
+      <div class="ref-phone">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.99.36 1.95.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6z"/></svg>
+        300-425-9025
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── CONTACTO ─────────────────────────────────────────── -->
+<section class="sec" id="contacto">
+<div class="wrap">
+  <div class="sec-head reveal" style="text-align:center">
+    <div class="eyebrow" style="margin:0 auto 1rem">Hablemos</div>
+    <h2 class="sec-title" style="max-width:560px;margin:0 auto .75rem">¿Listo para trabajar juntos?</h2>
+    <p class="sec-sub" style="margin:0 auto">Disponible para oportunidades en analítica de datos, gestión logística y automatización de procesos.</p>
+  </div>
+
+  <div class="ct-grid">
+    <a href="tel:3247146958" class="ct-card reveal">
+      <div class="ct-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.99.36 1.95.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6z"/></svg></div>
+      <div class="ct-lb">Teléfono</div>
+      <div class="ct-vl">324 714 6958</div>
+    </a>
+    <a href="mailto:odinprojecapp@gmail.com" class="ct-card reveal">
+      <div class="ct-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <div class="ct-lb">Email</div>
+      <div class="ct-vl">odinprojecapp@gmail.com</div>
+    </a>
+    <div class="ct-card reveal">
+      <div class="ct-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div class="ct-lb">Ubicación</div>
+      <div class="ct-vl">Santa Marta, Magdalena</div>
+    </div>
+    <div class="ct-card av reveal">
+      <div class="ct-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+      <div class="ct-lb">Disponibilidad</div>
+      <div class="ct-vl">Disponible inmediatamente</div>
+    </div>
+  </div>
+
+  <div class="ct-cta reveal">
+    <a href="Hoja de David Jose Monsalve Guzman.pdf" download class="btn-primary" style="display:inline-flex;font-size:.95rem;padding:.9rem 1.9rem">
+      Descargar Hoja de Vida
+      <span class="bi">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </span>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
 <footer>
   <p>&copy; 2026 · <strong>David José Monsalve Guzmán</strong> · CC 1.082.853.085 · Santa Marta, Colombia</p>
-  <p style="margin-top:.4rem;font-size:.72rem;opacity:.55">Especialista en Gestión de Flotas · Analista de Datos · Power BI · AppSheet</p>
+  <p style="margin-top:.4rem;font-size:.72rem;opacity:.5">Especialista en Gestión de Flotas · Analista de Datos · Power BI · AppSheet · Desarrollo Digital</p>
 </footer>
 
+<!-- ─── JAVASCRIPT ────────────────────────────────────────── -->
 <script>
-// MOBILE MENU
+gsap.registerPlugin(ScrollTrigger);
+
+/* NAV */
 const hbg = document.getElementById('hbg');
-const mob = document.getElementById('mobMenu');
+const mob = document.getElementById('mob');
 hbg.addEventListener('click', () => {
   hbg.classList.toggle('open');
   mob.classList.toggle('open');
   document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
 });
-function closeMenu() {
+function closeM() {
   hbg.classList.remove('open');
   mob.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-// SCROLL REVEAL
-const revObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+/* HERO ENTRANCE */
+gsap.from('#heroName', { opacity:0, y:40, duration:1, ease:'power3.out', delay:.2 });
+gsap.from('.hero-eyebrow', { opacity:0, y:20, duration:.8, ease:'power3.out', delay:.1 });
+gsap.from('.hero-role', { opacity:0, y:20, duration:.8, ease:'power3.out', delay:.4 });
+gsap.from('.hero-desc', { opacity:0, y:20, duration:.8, ease:'power3.out', delay:.55 });
+gsap.from('.hero-actions', { opacity:0, y:20, duration:.8, ease:'power3.out', delay:.7 });
+gsap.from('.hero-right', { opacity:0, x:30, duration:1, ease:'power3.out', delay:.35 });
 
-// SKILL BARS
-const barObs = new IntersectionObserver((entries) => {
+/* TYPING EFFECT */
+const roles = [
+  'Especialista en Gestión de Flotas',
+  'Coordinador de Mantenimiento',
+  'Analista de Datos · Power BI',
+  'Desarrollador AppSheet',
+  'Consultor en Automatización'
+];
+let ri = 0, ci = 0, typing = true;
+const rtEl = document.getElementById('roleText');
+
+function typeStep() {
+  const cur = roles[ri];
+  if (typing) {
+    rtEl.textContent = cur.substring(0, ci + 1);
+    ci++;
+    if (ci === cur.length) { typing = false; setTimeout(typeStep, 1800); return; }
+    setTimeout(typeStep, 55);
+  } else {
+    rtEl.textContent = cur.substring(0, ci - 1);
+    ci--;
+    if (ci === 0) {
+      typing = true;
+      ri = (ri + 1) % roles.length;
+      setTimeout(typeStep, 300);
+      return;
+    }
+    setTimeout(typeStep, 28);
+  }
+}
+setTimeout(typeStep, 1200);
+
+/* SCROLL REVEAL */
+const revEls = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
-    e.target.querySelectorAll('.sk-item[data-pct]').forEach(item => {
-      const fill = item.querySelector('.sk-fill');
-      if (fill) setTimeout(() => { fill.style.width = item.dataset.pct + '%'; }, 200);
+    gsap.to(e.target, {
+      opacity: 1, y: 0, x: 0,
+      duration: .85,
+      ease: 'power4.out',
+      delay: parseFloat(e.target.dataset.delay || 0)
     });
-    barObs.unobserve(e.target);
+    revObs.unobserve(e.target);
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+revEls.forEach((el) => {
+  gsap.set(el, { opacity: 0, y: 34 });
+  const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('reveal'));
+  const idx = siblings.indexOf(el);
+  el.dataset.delay = (idx * 0.07).toFixed(2);
+  revObs.observe(el);
+});
+
+/* NAV ACTIVE LINK */
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id]');
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + e.target.id ? 'var(--sky)' : '';
+      a.style.background = a.getAttribute('href') === '#' + e.target.id ? 'rgba(56,189,248,.08)' : '';
+    });
+  });
+}, { threshold: 0.35 });
+sections.forEach(s => navObs.observe(s));
+
+/* COUNTER ANIMATION */
+function animateCounter(el, target, suffix = '') {
+  gsap.to({ val: 0 }, {
+    val: target,
+    duration: 1.8,
+    ease: 'power2.out',
+    onUpdate: function() {
+      el.textContent = Math.round(this.targets()[0].val) + suffix;
+    }
+  });
+}
+const statsObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    animateCounter(document.getElementById('s1'), 14, '+');
+    animateCounter(document.getElementById('s2'), 18);
+    animateCounter(document.getElementById('s3'), 4);
+    statsObs.disconnect();
+  });
+}, { threshold: 0.5 });
+const statsCard = document.getElementById('s1');
+if (statsCard) statsObs.observe(statsCard.closest('.card'));
+
+/* SKILL BARS */
+const skObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.sk-item[data-pct]').forEach((item, i) => {
+      const fill = item.querySelector('.sk-fill');
+      if (!fill) return;
+      setTimeout(() => {
+        fill.style.width = item.dataset.pct + '%';
+      }, i * 120 + 150);
+    });
+    skObs.unobserve(e.target);
   });
 }, { threshold: 0.3 });
-document.querySelectorAll('.sk-cat').forEach(el => barObs.observe(el));
+document.querySelectorAll('.card').forEach(c => {
+  if (c.querySelector('.sk-item')) skObs.observe(c);
+});
+
+/* PHOTO RING PULSE */
+gsap.to('.photo-wrap', {
+  boxShadow: '0 0 80px rgba(56,189,248,.2), 0 0 140px rgba(56,189,248,.08)',
+  duration: 2.5,
+  repeat: -1,
+  yoyo: true,
+  ease: 'sine.inOut'
+});
 </script>
 </body>
 </html>
