@@ -392,17 +392,9 @@ nav{
 .pj-link.em{color:var(--em)}.pj-link.pur{color:var(--pur)}
 .pj-card:hover .pj-link{gap:.58rem}
 
-/* ─── WIP PROJECT CARDS ─────────────────────────────────── */
-a.pj-card[href="#"]{cursor:default}
-a.pj-card[href="#"] .pj-link{opacity:0;pointer-events:none}
-a.pj-card[href="#"]::before{
-  content:'En desarrollo';
-  position:absolute;top:.75rem;right:.75rem;
-  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);
-  color:var(--amb);border-radius:9999px;padding:.18rem .55rem;
-  pointer-events:none;
-}
+/* ─── PROJECT CARDS — no-url ─────────────────────────────── */
+a.pj-card[href="#"] .pj-link{opacity:.45}
+a.pj-card[href="#"]:hover .pj-link{opacity:.45}
 
 /* ─── REFERENCES ────────────────────────────────────────── */
 .ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.85rem;margin-top:2.5rem}
@@ -1137,7 +1129,7 @@ footer strong{color:var(--text2)}
         Desarrollo Web & Apps
       </div>
       <div class="pline"></div>
-      <span style="font-size:.68rem;color:var(--muted);white-space:nowrap">9 proyectos</span>
+      <span style="font-size:.68rem;color:var(--muted);white-space:nowrap">13 proyectos</span>
     </div>
     <div class="pj-grid">
 
@@ -1227,14 +1219,14 @@ footer strong{color:var(--text2)}
       </a>
 
       <a href="#" class="pj-card reveal" style="border-color:rgba(251,191,36,.18)">
-        <div class="pj-num">Python · ETL · Supabase · #W07</div>
-        <div class="pj-type" style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.13);color:var(--amb)">ETL / Data</div>
-        <div class="pj-title">KPI Operativos — Sistema ETL</div>
-        <div class="pj-desc">Sistema completo de ETL en Python para procesar indicadores operativos. Extrae, transforma y carga datos desde Excel hacia estructura lista para análisis estratégico. Incluye validaciones avanzadas, logging completo, dashboard web y propuesta comercial.</div>
+        <div class="pj-num">Next.js · TypeScript · Supabase · #W07</div>
+        <div class="pj-type" style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.13);color:var(--amb)">Dashboard KPI</div>
+        <div class="pj-title">KPI Operativos — Dashboard Interactivo</div>
+        <div class="pj-desc">Dashboard profesional para 6 KPIs operativos: Cashless, Secuenciamiento, PNP, Entrega en Rango, KM Plan y Modulaciones. Semaforización inteligente, cross-filtering estilo Power BI, ranking top/bottom performers, gráficos de tendencias con metas y disparadores. Importación desde Excel, gestión de metas mensuales y auditoría de cambios.</div>
         <div class="pills" style="margin-top:.6rem">
-          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Python</span>
-          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">ETL</span>
-          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Pandas</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Next.js 16</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">TypeScript</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Recharts</span>
           <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Supabase</span>
         </div>
         <div class="pj-link" style="color:var(--amb);margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
@@ -1255,16 +1247,59 @@ footer strong{color:var(--text2)}
       </a>
 
       <a href="#" class="pj-card reveal" style="border-color:rgba(56,189,248,.18)">
-        <div class="pj-num">HTML · CSS · JavaScript · #W09</div>
+        <div class="pj-num">Next.js · Supabase · #W09</div>
         <div class="pj-type pt-sky">Herramienta Web</div>
         <div class="pj-title">Generador de QR Dinámicos</div>
-        <div class="pj-desc">Aplicación web para generación de códigos QR dinámicos. Interfaz limpia y responsive construida con HTML5, CSS3 y JavaScript vanilla. Permite crear, personalizar y descargar QR codes para uso operativo y logístico.</div>
+        <div class="pj-desc">Aplicación web para generación de códigos QR dinámicos con almacenamiento en base de datos. Permite crear, personalizar, rastrear y descargar QR codes vinculados a operaciones logísticas. Interfaz responsive con Next.js y persistencia en Supabase.</div>
         <div class="pills" style="margin-top:.6rem">
-          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">HTML5</span>
-          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">CSS3</span>
-          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">JavaScript</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">Next.js 16</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">TypeScript</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">Supabase</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem">QRCode.js</span>
         </div>
         <div class="pj-link" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card em reveal" style="border-color:rgba(52,211,153,.18)">
+        <div class="pj-num">Next.js · SharePoint · Graph API · #W10</div>
+        <div class="pj-type pt-em">Portal Operativo</div>
+        <div class="pj-title">Control de Mando PBI — Portal GRC</div>
+        <div class="pj-desc">Portal integral de gestión conectado a SharePoint vía Microsoft Graph API. Tres módulos: rutinas MCRS con carga de datos, evaluaciones 5S con calendarización automática y evaluaciones OWD. Sidebar colapsable con glassmorphism, saludo dinámico por hora del día, tema claro/oscuro y validación de estructura Excel.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Next.js 16</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">SharePoint</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Graph API</span>
+          <span class="pill em" style="font-size:.62rem;padding:.18rem .55rem">Recharts</span>
+        </div>
+        <div class="pj-link em" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card pur reveal" style="border-color:rgba(167,139,250,.18)">
+        <div class="pj-num">Next.js · TypeScript · XLSX · #W11</div>
+        <div class="pj-type pt-pur">Herramienta Analítica</div>
+        <div class="pj-title">5 Porqués — Análisis de Causa Raíz</div>
+        <div class="pj-desc">Herramienta web interactiva para análisis de causa raíz con metodología de los 5 Porqués. Interfaz guiada paso a paso para descomponer problemas en sus raíces causales. Exportación de análisis a Excel y visualización clara de la cadena causal. Diseño limpio con TailwindCSS.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">Next.js 16</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">TypeScript</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">TailwindCSS</span>
+          <span class="pill pur" style="font-size:.62rem;padding:.18rem .55rem">XLSX</span>
+        </div>
+        <div class="pj-link pur" style="margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
+      </a>
+
+      <a href="#" class="pj-card reveal" style="border-color:rgba(251,191,36,.18)">
+        <div class="pj-num">Python · Pandas · SharePoint · #W12</div>
+        <div class="pj-type" style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.13);color:var(--amb)">ETL / Data</div>
+        <div class="pj-title">Clean Data — Limpieza de Datos de Capacitaciones</div>
+        <div class="pj-desc">Sistema profesional de limpieza, validación y estandarización de datos de capacitaciones para SharePoint. Eliminación de duplicados, normalización de nombres, corrección de encoding y fuzzy matching (85% similitud). Reportes automáticos en Excel y HTML con visualización interactiva. Descarga y carga automática vía Microsoft Graph API.</div>
+        <div class="pills" style="margin-top:.6rem">
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Python</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Pandas</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">SharePoint</span>
+          <span class="pill" style="font-size:.62rem;padding:.18rem .55rem;color:var(--amb);background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.14)">Graph API</span>
+        </div>
+        <div class="pj-link" style="color:var(--amb);margin-top:.7rem">Ver Proyecto <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></div>
       </a>
 
     </div>
